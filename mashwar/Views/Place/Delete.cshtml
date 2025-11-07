@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Delete";
+}
+@model mashwar.Models.Place
+
+
+<h2>Confirm To Delete</h2>
+<h3>Are you Sure To Delete @Model.Name</h3>
+<hr />
+<div>
+    <strong>Description:@Model.Description</strong>
+    <br />
+    <strong>Location:@Model.Location</strong>
+    <br />
+    <strong>User:@Model.Users?.User_Name</strong>
+    <br />
+    <strong>Price Level:@Model.PriceLevel</strong>
+</div>
+<form asp-action="Delete" asp-controller="Place" method="post" onsubmit="return del_conf();">
+    <span>
+        @Html.AntiForgeryToken()
+    </span>
+    <input type="hidden" asp-for="PlaceID" /><br />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" asp-controller="Place" class="btn btn-secondary"> Back</a>
+</form>
+@section Scripts{
+<script> 
+    function del_conf(){
+        return confirm("هل انت متأكد من حذف هذا المكان")
+
+    }
+</script>
+}

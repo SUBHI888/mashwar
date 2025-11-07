@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Place>
+
+@{
+    ViewData["Title"] = "Place";
+}
+<a asp-action="Create" asp-controller="Place" class="btn btn-secondary">Create New Place</a>
+<br />
+<p> place_table</p>
+
+<br />
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Number</th>
+            <th>Place_Image</th>
+            <th>Name</th>
+
+            <th>Description</th>
+            
+            <th>Location</th>
+
+            <th>Rating</th>
+
+            <th>Price Level</th>
+
+            <th>Place User</th>
+            <th style="text-align:center" colspan="2">Action</th>
+
+          
+        </tr>
+    </thead>
+
+    <tbody>
+        @{
+            int counter = 1;
+        }
+        @foreach (var data in Model)
+        {<tr>
+            <td> @counter</td>
+                <td>
+                    <img height="75" width="75" class="rounded-circle" src="@Url.Content(data.Place_Image)" />
+                </td>
+            <td>@data.Name</td>
+            <td>@data.Description</td>
+            <td>@data.Location</td>
+            <td>@data.Rating</td>
+            <td>@data.PriceLevel</td>
+            <td>@data.Users?.User_Name</td>
+            <td><a class="btn btn-info" asp-action="edit" asp-controller="place" asp-route-id="@data.PlaceID">Edit</a></td>
+            <td><a class="btn btn-danger" asp-action="delete" asp-controller="place" asp-route-id="@data.PlaceID">Delete</a></td>
+            
+                
+        </tr>
+        counter++;
+            
+        }
+        
+    </tbody>
+</table> 

@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Regester";
+}
+@model RegesterModel
+
+<h2>Create User</h2>
+
+<form asp-action="Regester" asp-controller="User" method="post" enctype="multipart/form-data" role="form">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+
+        <label asp-for="User_Name">User_Name</label>
+        <input asp-for="User_Name" type="text" placeholder="Enter User_Name..." class="form-control" />
+        <span asp-validation-for="User_Name" class="text-danger"></span>
+    </div>  <br />
+    <div class="form-group">
+        <label asp-for="User_Email">User_Email</label>
+        <input asp-for="User_Email" type="text" placeholder="Enter User_Email..." class="form-control" />
+        <span asp-validation-for="User_Email" class="text-danger"></span>
+    </div><br />
+    <div class="form-group">
+        <label asp-for="Password">Password</label>
+        <input asp-for="Password" type="password" placeholder="Enter Password..." class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div><br />
+    <div class="form-group">
+        <label asp-for="Confirm_Password">Confirm_Password</label>
+        <input asp-for="Confirm_Password" type="password" placeholder="Enter Confirm_Password..." class="form-control" />
+        <span asp-validation-for="Confirm_Password" class="text-danger"></span>
+    </div><br />
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Regester</button>
+        <a asp-action="Login" asp-controller="User" class="btn btn-info"> Login</a>
+    </div>
+
+</form>

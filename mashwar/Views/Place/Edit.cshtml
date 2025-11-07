@@ -1,0 +1,91 @@
+﻿@* @{
+    ViewData["Title"] = "Edit";
+}
+@model Place
+
+<div style="padding:5px; text-align:center; border-radius:5px 5px;" class="9-3 mb-2 bg-info text-white">
+    <h3>Update Place</h3>
+</div>
+<form asp-action="Edit" asp-controller="Place" role="form" method="post"
+      enctype="multipart/form-data">
+    <div>
+        @Html.AntiForgeryToken()
+    </div>
+    <div>
+        <input type="hidden" asp-for="PlaceID" />
+    </div><div>
+        <label asp-for="Name">Place_Name</label>
+        <input asp-for="Name" type="text" placeholder="Enter Places Name..." class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div><br />
+    <div>
+        <label asp-for="Description">Place_Description</label>
+        <input asp-for="Description" type="text" placeholder="Enter Place Description..." class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div><br />
+    <div class="form-group">
+        <label asp-for="Location">Place_Location</label>
+        <input asp-for="Location" type="text" placeholder="Enter Place Location..." class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div><br />
+    <div class="form-group">
+        <label asp-for="Rating">Place_Rating</label>
+        <input asp-for="Rating" type="number" placeholder="Enter Place Rating..." class="form-control" />
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div><br />
+
+    <div class="form-group">
+        <label asp-for="User_Id"></label>
+        <select asp-for="User_Id" class="form-select" asp-items="@ViewBag.part">
+            <option value="">--User</option>
+        </select>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-danger">Save</button>
+    <a asp-action="Index" asp-controller="Place" class="btn btn-outline-secondary"> Back</a>
+
+</form>
+
+
+
+ *@
+
+
+@model mashwar.Models.Place
+@{
+    ViewData["Title"] = "Edit Place";
+}
+
+<h2>Edit Place</h2>
+
+<form method="post" asp-action="Edit" asp-controller="Place">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="PlaceID" />
+
+    <label asp-for="Name"></label>
+    <input asp-for="Name" class="form-control" /><br />
+
+    <label asp-for="Description"></label>
+    <input asp-for="Description" class="form-control" /><br />
+
+    <label asp-for="Location"></label>
+    <input asp-for="Location" class="form-control" /><br />
+
+    <label asp-for="Rating"></label>
+    <input asp-for="Rating" type="number" class="form-control" /><br />
+
+    <label asp-for="User_Id">User</label>
+    <select asp-for="User_Id" asp-items="@ViewBag.part" class="form-select">
+        <option value="">-- Select User --</option>
+    </select><br />
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</form>
+
+<script>
+    
+    document.querySelector("form").addEventListener("submit", function(){
+        alert("هل انت متأكد من التعديل؟");
+    });
+</script>

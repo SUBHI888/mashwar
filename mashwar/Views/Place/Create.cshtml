@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Create";
+}
+@model Place
+<br />
+<h2>Create New Place</h2>
+
+<form asp-action="Create" asp-controller="Place" method="post" enctype="multipart/form-data" role="form">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label asp-for="Name">Place_Name</label>
+        <input asp-for="Name" class="form-control" type="text" placeholder="Enter your place Name..." />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="Description">Place_Description</label>
+        <input asp-for="Description" class="form-control" type="text" placeholder="Enter your place Description..." />
+        <span asp-validation-for="Description"></span>
+    </div><br />
+    <div class="form-group">
+        <label asp-for="Location">Place_Location</label>
+        <input asp-for="Location" class="form-control" type="text" placeholder="Enter your place Location..." />
+        <span asp-validation-for="Location"></span>
+    </div><br />
+    <div class="form-group">
+        <label asp-for="Place_Image">Place_Image</label>
+        <input asp-for="Place_Image" type="file" name="File" placeholder="Enter Place Image..." class="form-control" />
+        <span asp-validation-for="Place_Image" class="text-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="Rating">Place_Rating</label>
+        <input asp-for="Rating" class ="form-control" type="number" placeholder="Enter your place Rating..." />
+        <span asp-validation-for="Rating"></span>
+    </div><br />
+    <div class="form-group">
+        <label asp-for="PriceLevel">Price_level</label>
+        <input asp-for="PriceLevel" class="form-control" type="text" placeholder="Enter your Price level..." />
+        <span asp-validation-for="PriceLevel"></span>
+    </div><br />
+    <div class="form-group">
+       <label asp-for="User_Id">User_Name</label>
+        <select class="form-select" asp-for="User_Id" asp-items="@ViewBag.App">
+           <option value="">__Select FromUser__
+           </option>
+       </select>
+       <span asp-validation-for="User_Id"></span>
+    </div><br />
+    <div class="form-group">
+        <button class="btn btn-warning" type="submit">Save</button>
+    </div>
+</form>
