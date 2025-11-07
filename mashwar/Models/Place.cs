@@ -8,7 +8,7 @@ namespace mashwar.Models
         public class Place
         {
         [Key]
-            public int PlaceID { get; set; }
+            public int PlaceID { get; set; }//kfk
 
             [Required (ErrorMessage ="Please enter this faild"), StringLength(200)]
             public string Name { get; set; }
