@@ -26,7 +26,7 @@ namespace mashwar.Controllers
         {
             ViewBag.App = new SelectList(_Db.Users, "User_Id", "User_Name");
             return View();
-            //d
+            //edit
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
