@@ -19,7 +19,7 @@ namespace mashwar.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _Db.places.Include(e => e.Users).ToListAsync();
-            return View("index", data);//k
+            return View("index", data);
         }
         [HttpGet]
         public IActionResult Create()
