@@ -31,6 +31,15 @@
                     </ul>
                 </div>
                 <div>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+
+                        var user_data = await UserManager.GetUserAsync(User);
+                        <span class="text-info" @user_data.UserName></span>
+                    }
+                </div>
+                <div>
+     
                 @{
                     var currentuiCultere = System.Globalization.CultureInfo.CurrentUICulture.Name;
                 }
@@ -42,10 +51,23 @@
                 }
                 else
                 {
-                    <a class="btn btn-secondary" asp-action="ChangeLanguage"
+                    <a class="btn btn-primary" asp-action="ChangeLanguage"
                        asp-controller="Home"asp-route-culture="ar"
                        asp-route-returnurl="@Context.Request.Path">Arabic</a>
                 }
+                </div>
+
+                <div>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <a class="btn btn-secondary" asp-action="Logout" asp-controller="User">Logout</a>
+                    }
+                    else
+                    {
+                                            <a class="btn btn-dark" asp-action="Login"asp-controller="User">Login</a>
+
+                    }
+                   
                 </div>
             </div>
         </nav>

@@ -28,6 +28,7 @@ namespace mashwar.Models
         public ICollection<Booking> Bookings { get; set; }
         public ICollection<BusinessLicense> BusinessLicenses { get; set; }
         public ICollection<Notification> Notifications { get; set; }
+        public ICollection<Category> categories { get; set; }
         
 
     }

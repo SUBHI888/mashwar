@@ -120,7 +120,41 @@ namespace mashwar.Controllers
             //ViewBag.part = new SelectList(_Db.Users, "User_Id", "User_Name", model.User_Id);
             //return View(model);
         }
+        public IActionResult Amman()
+        {
+            return View();
+        }
+       public IActionResult Maan()
+        {
+            return View();
+        }
+        public IActionResult Aqaba()
+        {
+            return View();
+        }
+      public IActionResult zarqa()
+        {
+            return View();
+        }
+        public IActionResult ResturantAmman()
+        {
+            return View();
+        }
+        public IActionResult CafeesAmman() 
+        {
+            return View();
+        }
+        public IActionResult HotelAmman()
+        {
+            return View();
+        }
+        public IActionResult EntertainmentAmman()
+        {  return View();}
+        public IActionResult ShoppingCentersAmman()
+        { return View();}
+        public IActionResult TouristPlacesAmman()
+        { return View(); }
     }
-    }
+}
 
 

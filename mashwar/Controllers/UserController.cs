@@ -1,10 +1,8 @@
 ﻿using mashwar.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-
-
-
-namespace mashwar.Controllers
+using System.Threading.Tasks;
+ namespace mashwar.Controllers
 {
     public class UserController : Controller
     {
@@ -70,11 +68,19 @@ namespace mashwar.Controllers
             if (result.Succeeded) { return RedirectToAction("index", "home"); }
             return View(model);
 
-
-
-
-
         }
+
+
+
+        public IActionResult AccessDenied()
+        {  return View(); }
+        public async Task<IActionResult> Logout()
+
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("login", "user"); ;
+        }
+
     }
 }
        

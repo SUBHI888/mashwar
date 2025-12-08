@@ -8,7 +8,7 @@ namespace mashwar.Models
         public class Place
         {
         [Key]
-            public int PlaceID { get; set; }//kfk
+            public int PlaceID { get; set; }
 
             [Required (ErrorMessage ="Please enter this faild"), StringLength(200)]
             public string Name { get; set; }
@@ -30,6 +30,7 @@ namespace mashwar.Models
         public ICollection<Review> Reviews { get; set; }
         public ICollection<Booking> Bookings { get; set; }
         public ICollection<WorkTime> WorkTimes { get; set; }
+        public ICollection<Category> categories { get; set; }
 
     }
 }

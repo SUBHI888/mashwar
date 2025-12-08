@@ -1,5 +1,6 @@
-using mashwar.Models;
+﻿using mashwar.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -40,7 +41,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddMemoryCache();
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.AccessDeniedPath = "/User/ccessDenied";
+    options.AccessDeniedPath = "/User/AccessDenied";
     options.Cookie.Name = "cookie";
     options.Cookie.HttpOnly = true;
     options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
@@ -49,10 +50,26 @@ builder.Services.ConfigureApplicationCookie(options =>
 }
 );
 #endregion
+#region login with google
+
+var google = builder.Configuration.GetSection("Authentication:Google");
+builder.Services.AddAuthentication().AddGoogle(Options =>
+{
+    Options.ClientId = google["ClientId"]!;
+    Options.ClientSecret = google["ClientSecret"]!;
+    Options.CallbackPath = "/signin-google";
+});
+#endregion
+
+
+
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+//app.UseAuthentication();
+//app.UseAuthorization();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -68,10 +85,15 @@ var localizationoption = app.Services.GetService<IOptions<RequestLocalizationOpt
 app.UseRequestLocalization(localizationoption!.Value);
 
 
-app.UseRouting();
 
-app.UseAuthorization();
+app.UseRouting();
+app.UseSession();
+
 app.UseAuthentication();
+app.UseAuthorization();
+
+
+
 
 
 app.MapControllerRoute(

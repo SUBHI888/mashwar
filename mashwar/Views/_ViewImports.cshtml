@@ -4,3 +4,6 @@
 
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResource> Localizer
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signInManager
+@inject UserManager<IdentityUser> UserManager

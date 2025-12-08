@@ -17,6 +17,7 @@ namespace mashwar.Models
         public DbSet<BusinessLicense> BusinessLicenses { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<WorkTime> WorkTimes { get; set; }
+        public DbSet<Category> categories { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -80,6 +81,18 @@ namespace mashwar.Models
                 .WithMany(p => p.WorkTimes)
                 .HasForeignKey(w => w.PlaceId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Category>()
+              .HasOne(b => b.Place)
+              .WithMany(p => p.categories)
+              .HasForeignKey(b => b.PlaceId)
+              .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Category>()
+              .HasOne(r => r.User)
+              .WithMany(u => u.categories)
+              .HasForeignKey(r => r.UserId)
+              .OnDelete(DeleteBehavior.NoAction);
 
 
         }
