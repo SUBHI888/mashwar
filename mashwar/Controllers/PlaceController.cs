@@ -155,6 +155,8 @@ namespace mashwar.Controllers
         { return View();}
         public IActionResult TouristPlacesAmman()
         { return View(); }
+        public IActionResult EntertainmentAqaba()
+        { return View(); }
     }
 }
 
