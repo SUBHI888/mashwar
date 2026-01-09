@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حجز طاولة</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(rgba(171, 170, 170, 0.38), rgb(143, 26, 26));
+            direction: rtl;
+        }
+
+        #langBtn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 12px;
+            background: #c8102e;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 70px auto 20px;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .guest-count {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .guest-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #333;
+        }
+
+        .guest-btn:hover,
+        .guest-btn.active {
+            border-color: #c8102e;
+            background: #fff5f5;
+            color: #c8102e;
+            font-weight: bold;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .time-btn {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #333;
+            font-family: inherit;
+        }
+
+        .time-btn:hover,
+        .time-btn.active {
+            border-color: #c8102e;
+            background: #fff5f5;
+            color: #c8102e;
+            font-weight: bold;
+        }
+
+        .meal-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .meal-card {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            background: white;
+        }
+
+        .meal-card:hover,
+        .meal-card.active {
+            border-color: #c8102e;
+            background: #fff5f5;
+        }
+
+        .meal-icon {
+            font-size: 2rem;
+            margin-left: 15px;
+        }
+
+        .meal-info {
+            flex: 1;
+            text-align: right;
+        }
+
+        .meal-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .meal-desc {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .book-btn {
+            width: 100%;
+            padding: 16px;
+            background: #c8102e;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .book-btn:hover {
+            background: #a00d25;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(200, 16, 46, 0.3);
+        }
+
+        .book-btn:active {
+            transform: translateY(0);
+        }
+
+        #reservationModal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            padding: 25px 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+            display: none;
+            text-align: center;
+            z-index: 1000;
+            width: 90%;
+            max-width: 350px;
+        }
+
+        #reservationModal h2 {
+            margin-bottom: 15px;
+        }
+
+        #reservationModal p {
+            margin: 5px 0;
+        }
+
+        #closeModal {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #c8102e;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #modalOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="langBtn">EN</button>
+
+    <div class="container">
+        <div class="section">
+            <div class="section-title" data-ar="عدد الأشخاص" data-en="Guests">عدد الأشخاص</div>
+            <div class="guest-count">
+                <button class="guest-btn active" data-guests="1">1</button>
+                <button class="guest-btn" data-guests="2">2</button>
+                <button class="guest-btn" data-guests="3">3</button>
+                <button class="guest-btn" data-guests="4">4</button>
+                <button class="guest-btn" data-guests="5">5+</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title" data-ar="الوقت المتاح لليوم" data-en="Available Time">الوقت المتاح لليوم</div>
+            <div class="time-slots">
+                <button class="time-btn active">07:00 م</button>
+                <button class="time-btn">08:00 م</button>
+                <button class="time-btn">08:30 م</button>
+                <button class="time-btn">09:00 م</button>
+                <button class="time-btn">10:00 م</button>
+                <button class="time-btn">11:00 م</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title" data-ar="مكان الطاولة" data-en="Table Location">مكان الطاولة</div>
+            <div class="meal-options">
+                <div class="meal-card active">
+                    <span class="meal-icon">🥗</span>
+                    <div class="meal-info">
+                        <div class="meal-title" data-ar="صالة داخلية" data-en="Indoor Hall">صالة داخلية</div>
+                        <div class="meal-desc" data-ar="مكيف، هادئ ومريح" data-en="AC, quiet and comfortable">مكيف، هادئ
+                            ومريح</div>
+                    </div>
+                </div>
+                <div class="meal-card">
+                    <span class="meal-icon">🌳</span>
+                    <div class="meal-info">
+                        <div class="meal-title" data-ar="جلسة خارجية" data-en="Outdoor">جلسة خارجية</div>
+                        <div class="meal-desc" data-ar="منظر طبيعي وأجواء منعشة"
+                            data-en="Nature view and fresh atmosphere">منظر طبيعي وأجواء منعشة</div>
+                    </div>
+                </div>
+                <div class="meal-card">
+                    <span class="meal-icon">👥</span>
+                    <div class="meal-info">
+                        <div class="meal-title" data-ar="ركن خاص للشخصيات" data-en="VIP Corner">ركن خاص للشخصيات</div>
+                        <div class="meal-desc" data-ar="خصوصية تامة ومخدمة بعناية"
+                            data-en="Full privacy and carefully served">خصوصية تامة ومخدمة بعناية</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="book-btn" data-ar="تأكيد الحجز الآن" data-en="Confirm Booking">تأكيد الحجز الآن</button>
+    </div>
+
+
+    <div id="reservationModal">
+        <h2 id="modalTitle"></h2>
+        <p id="modalGuests"></p>
+        <p id="modalTime"></p>
+        <p id="modalTable"></p>
+        <button id="closeModal">OK</button>
+    </div>
+    <div id="modalOverlay"></div>
+
+    <script>
+        let isArabic = true;
+
+
+        document.getElementById('langBtn').addEventListener('click', function () {
+            isArabic = !isArabic;
+            this.textContent = isArabic ? 'EN' : 'AR';
+
+            document.querySelectorAll('[data-ar]').forEach(el => {
+                el.textContent = isArabic ? el.dataset.ar : el.dataset.en;
+            });
+        });
+
+        const guestBtns = document.querySelectorAll('.guest-btn');
+        guestBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                guestBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        const timeBtns = document.querySelectorAll('.time-btn');
+        timeBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                timeBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        const mealCards = document.querySelectorAll('.meal-card');
+        mealCards.forEach(card => {
+            card.addEventListener('click', function () {
+                mealCards.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.querySelector('.book-btn').addEventListener('click', function () {
+            const selectedGuests = document.querySelector('.guest-btn.active').dataset.guests;
+            const selectedTime = document.querySelector('.time-btn.active').textContent;
+            const selectedMeal = document.querySelector('.meal-card.active .meal-title').textContent;
+
+            document.getElementById('modalTitle').textContent = isArabic ? 'تم تأكيد حجزك!' : 'Your reservation is confirmed!';
+            document.getElementById('modalGuests').textContent = (isArabic ? 'عدد الأشخاص: ' : 'Guests: ') + selectedGuests;
+            document.getElementById('modalTime').textContent = (isArabic ? 'الوقت: ' : 'Time: ') + selectedTime;
+            document.getElementById('modalTable').textContent = (isArabic ? 'المكان: ' : 'Table: ') + selectedMeal;
+
+            document.getElementById('reservationModal').style.display = 'block';
+            document.getElementById('modalOverlay').style.display = 'block';
+        });
+
+        function closeModal() {
+            document.getElementById('reservationModal').style.display = 'none';
+            document.getElementById('modalOverlay').style.display = 'none';
+        }
+        document.getElementById('closeModal').addEventListener('click', closeModal);
+        document.getElementById('modalOverlay').addEventListener('click', closeModal);
+    </script>
+</body>
+
+</html>

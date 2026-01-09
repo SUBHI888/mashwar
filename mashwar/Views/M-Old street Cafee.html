@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Old Street Cafe & Restaurant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #37343f;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        header {
+            background-color: #000000;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .restaurant-name {
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #f39c12;
+        }
+
+        .restaurant-location {
+            font-size: 18px;
+            color: #ecf0f1;
+        }
+
+        /* زر الترجمة */
+        #translateBtn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #f39c12;
+            color: #201e1e;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        #translateBtn:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #f39c12;
+            padding-bottom: 10px;
+        }
+
+        .info-card p,
+        .info-card ul {
+            color: #555;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .info-card ul {
+            list-style-position: inside;
+        }
+
+        .info-card li {
+            margin: 8px 0;
+            padding-right: 10px;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .contact-icon {
+            font-size: 20px;
+            color: #f39c12;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .features {
+            background: linear-gradient(135deg, #b7b682 0%, #212023 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .features h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .menu-highlights {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .menu-highlights h2 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid #f39c12;
+            padding-bottom: 15px;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .menu-item {
+            padding: 20px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            border-color: #f39c12;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.2);
+        }
+
+        .menu-item h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .reserve-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .reserve-btn {
+            background: linear-gradient(135deg, #b7b682 0%, #1f1e1e 100%);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(144, 136, 105, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .reserve-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(209, 208, 207, 0.6);
+        }
+
+        @media (max-width: 768px) {
+
+            .info-grid,
+            .features-grid,
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+
+            .restaurant-name {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <button id="translateBtn">عربي \ English</button>
+            <h1 class="restaurant-name" data-ar="Old Street Cafe & Restaurant" data-en="Old Street Cafe & Restaurant">
+                Old Street Cafe & Restaurant</h1>
+            <p class="restaurant-location" data-ar="📍 شارع السياحة – وادي موسى، معان، الأردن"
+                data-en="📍 Tourism Street – Wadi Musa, Ma'an, Jordan">
+                📍 شارع السياحة – وادي موسى، معان، الأردن
+            </p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-image">
+            <img src="Cafees Maan/Old street.jpeg" alt="Old Street Cafe">
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h2 data-ar="📖 نبذة عن المكان" data-en="📖 About the Place">📖 نبذة عن المكان</h2>
+                <p data-ar="Old Street Cafe & Restaurant هو كافيه ومطعم مميز يقع في شارع السياحة بمدينة وادي موسى – معان. يتميز بأجوائه الهادئة وخدمته الودودة، ويعد وجهة مفضلة للسياح والزوار بعد جولاتهم في البتراء. يقدم المكان مزيجًا من الأكلات المحلية والعالمية إلى جانب المشروبات الساخنة والباردة."
+                    data-en="Old Street Cafe & Restaurant is a unique cafe and restaurant located on Tourism Street in Wadi Musa – Ma'an. It offers a calm atmosphere and friendly service, making it a preferred destination for tourists after their Petra tours. The place serves a mix of local and international dishes along with hot and cold beverages.">
+                    Old Street Cafe & Restaurant هو كافيه ومطعم مميز يقع في شارع السياحة بمدينة وادي موسى – معان. يتميز
+                    بأجوائه الهادئة وخدمته الودودة، ويعد وجهة مفضلة للسياح والزوار بعد جولاتهم في البتراء. يقدم المكان
+                    مزيجًا من الأكلات المحلية والعالمية إلى جانب المشروبات الساخنة والباردة.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h2 data-ar="📞 معلومات التواصل" data-en="📞 Contact Info">📞 معلومات التواصل</h2>
+                <div class="contact-info">
+                    <span class="contact-icon">📱</span>
+                    <p data-ar="<strong>الهاتف:</strong> 07 7807 7937" data-en="<strong>Phone:</strong> 07 7807 7937">
+                        <strong>الهاتف:</strong> 07 7807 7937</p>
+                </div>
+                <div class="contact-info" data-ar="📍 <strong>العنوان:</strong> شارع السياحة – وادي موسى، الأردن"
+                    data-en="📍 <strong>Address:</strong> Tourism Street – Wadi Musa, Jordan">
+                    📍 <strong>العنوان:</strong> Tourism Street – Wadi Musa, Jordan
+                </div>
+                <div class="contact-info">
+                    📘 <strong data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</strong>
+                    <a href="mailto:petraoldstreet@gmail.com">petraoldstreet@gmail.com</a>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h2 data-ar="🕐 أوقات العمل" data-en="🕐 Opening Hours">🕐 أوقات العمل</h2>
+                <div class="hours-row" data-ar="يوميًا" data-en="Daily">
+                    <span>يوميًا</span>
+                    <span data-ar="09:00 صباحًا – 12:00 منتصف الليل" data-en="09:00 AM – 12:00 Midnight">09:00 صباحًا –
+                        12:00 منتصف الليل</span>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h2 data-ar="⭐ التخصصات" data-en="⭐ Specialties">⭐ التخصصات</h2>
+                <ul>
+                    <li data-ar="☕ قهوة عربية وتركية ومختصة" data-en="☕ Arabic, Turkish, and Specialty Coffee">☕ قهوة
+                        عربية وتركية ومختصة</li>
+                    <li data-ar="🥤 مشروبات ساخنة وباردة" data-en="🥤 Hot & Cold Beverages">🥤 مشروبات ساخنة وباردة</li>
+                    <li data-ar="🍽️ أكلات أردنية وعربية" data-en="🍽️ Jordanian & Arabic Dishes">🍽️ أكلات أردنية
+                        وعربية</li>
+                    <li data-ar="🥗 وجبات خفيفة ومقبلات" data-en="🥗 Light Meals & Appetizers">🥗 وجبات خفيفة ومقبلات
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2 data-ar="✨ مميزات المكان ✨" data-en="✨ Features ✨">✨ مميزات المكان ✨</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🅿️</div>
+                    <h3 data-ar="موقف سيارات" data-en="Parking">موقف سيارات</h3>
+                    <p data-ar="موقف مجاني للزبائن" data-en="Free for customers">موقف مجاني للزبائن</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📶</div>
+                    <h3 data-ar="واي فاي مجاني" data-en="Free Wi-Fi">واي فاي مجاني</h3>
+                    <p data-ar="إنترنت متاح للزبائن" data-en="Internet available for customers">إنترنت متاح للزبائن</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                    <h3 data-ar="جلسات مريحة" data-en="Comfortable Seating">جلسات مريحة</h3>
+                    <p data-ar="مناسب للعائلات والأصدقاء" data-en="Suitable for families & friends">مناسب للعائلات
+                        والأصدقاء</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💳</div>
+                    <h3 data-ar="طرق الدفع" data-en="Payment Methods">طرق الدفع</h3>
+                    <p data-ar="نقدي وبطاقات ائتمانية" data-en="Cash & Credit Cards">نقدي وبطاقات ائتمانية</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">❄️</div>
+                    <h3 data-ar="مكيف الهواء" data-en="Air Conditioning">مكيف الهواء</h3>
+                    <p data-ar="راحة طوال السنة" data-en="Comfort all year">راحة طوال السنة</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-highlights">
+            <h2 data-ar="🍴 أشهر الأصناف" data-en="🍴 Popular Items">🍴 أشهر الأصناف</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <h3 data-ar="قهوة عربية وتركية" data-en="Arabic & Turkish Coffee">قهوة عربية وتركية</h3>
+                </div>
+                <div class="menu-item">
+                    <h3 data-ar="مشروبات باردة" data-en="Cold Drinks">مشروبات باردة</h3>
+                </div>
+                <div class="menu-item">
+                    <h3 data-ar="أطباق محلية" data-en="Local Dishes">أطباق محلية</h3>
+                </div>
+                <div class="menu-item">
+                    <h3 data-ar="مقبلات وسناك" data-en="Appetizers & Snacks">مقبلات وسناك</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="reserve-section">
+            <a href="eserve.html">
+                <button class="reserve-btn" data-ar="احجز طاولتك الآن 🎯" data-en="Reserve Your Table Now 🎯">احجز
+                    طاولتك الآن 🎯</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const btn = document.getElementById('translateBtn');
+        let isArabic = true;
+
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-ar]').forEach(el => {
+                el.innerHTML = isArabic ? el.getAttribute('data-en') : el.getAttribute('data-ar');
+            });
+            btn.textContent = isArabic ? 'AR' : 'EN';
+            isArabic = !isArabic;
+        });
+    </script>
+
+</body>
+
+</html>

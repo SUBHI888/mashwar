@@ -260,10 +260,19 @@ namespace mashwar.Migrations
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<TimeSpan>("BookingTime")
+                        .HasColumnType("time");
+
                     b.Property<int>("NumberOfPeople")
                         .HasColumnType("int");
 
                     b.Property<int>("PlaceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TableLocation")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -376,6 +385,9 @@ namespace mashwar.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlaceID"));
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()

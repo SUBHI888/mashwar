@@ -2,162 +2,150 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 
 namespace mashwar.Controllers
 {
     public class PlaceController : Controller
     {
-        public readonly AppDbContext _Db;
-        private IWebHostEnvironment _environment;
+        private readonly AppDbContext _Db;
+        private readonly IWebHostEnvironment _environment;
+
         public PlaceController(AppDbContext db, IWebHostEnvironment environment)
         {
             _Db = db;
             _environment = environment;
         }
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var data = await _Db.places.Include(e => e.Users).ToListAsync();
-            return View("index", data);
+            var data = await _Db.places.Include(p => p.Users).ToListAsync();
+            return View(data);
         }
+
+       
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.App = new SelectList(_Db.Users, "User_Id", "User_Name");
+            ViewBag.Users = new SelectList(_Db.Users, "User_Id", "User_Name");
+            ViewBag.Categories = new SelectList(_Db.categories, "CategoryName", "CategoryName");
             return View();
-            //edit
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Place model, IFormFile File)
         {
-            ViewBag.App = new SelectList(_Db.Users, "User_Id", "User_Name");
-            model.Place_Image = Uploade_Image(File);
+            if (File != null)
+                model.Place_Image = UploadImage(File);
+
             _Db.places.Add(model);
             _Db.SaveChanges();
             return RedirectToAction("Index");
         }
-        private string Uploade_Image(IFormFile CourseInput)
-        {
-            string wwwPath = _environment.WebRootPath;
-            string contentPath = this._environment.ContentRootPath;
 
-            string path = Path.Combine(this._environment.WebRootPath, "Uploads");
+        private string UploadImage(IFormFile file)
+        {
+            string path = Path.Combine(_environment.WebRootPath, "Uploads");
             if (!Directory.Exists(path))
-            {
                 Directory.CreateDirectory(path);
-            }
 
-            string fileName = Path.GetFileNameWithoutExtension(CourseInput.FileName);
-            string newName = fileName + Guid.NewGuid().ToString() + Path.GetExtension(CourseInput.FileName);
-            using (FileStream stream = new FileStream(Path.Combine(path, newName), FileMode.Create))
+            string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+            string newName = fileName + Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+
+            using (var stream = new FileStream(Path.Combine(path, newName), FileMode.Create))
             {
-                CourseInput.CopyTo(stream);
-                //    uploadedFiles.Add(fileName);
-                //  ViewBag.Message += string.Format("<b>{0}</b> uploaded.<br />", fileName);
+                file.CopyTo(stream);
             }
 
-            return "\\Uploads\\" + newName;
+            return "/Uploads/" + newName;
         }
-        [HttpGet]
-        public IActionResult Delete(int id)
-        {
-            var place = _Db.places.Include(e =>e.Users).FirstOrDefault(x => x.PlaceID == id);
-            if (place == null)
-            {
-                return NotFound();
-            }
-                
-                return View("Delete", place);
 
-
-
-
-
-            }
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult Confirm_Delete(int id)
-        {
-            var pla = _Db.places.Find(id);
-            if (pla == null)
-            {
-                return NotFound();
-            }
-            _Db.places.Remove(pla);
-            _Db.SaveChanges();
-            return RedirectToAction("index");
-
-
-        }
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var data = _Db.places.Find(id);
-            if (data == null) { return NotFound(); }
-            ViewBag.part = new SelectList(_Db.Users, "User_Id", "User_Name",data.User_Id);
-            return View("Edit", data);
+            var place = _Db.places.Find(id);
+            if (place == null) return NotFound();
+
+            ViewBag.Users = new SelectList(_Db.Users, "User_Id", "User_Name", place.User_Id);
+            ViewBag.Categories = new SelectList(_Db.categories, "CategoryName", "CategoryName", place.CategoryName);
+            return View(place);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Place model)
+        public IActionResult Edit(Place model, IFormFile File)
         {
-            //if (ModelState.IsValid)
-            {
-                var place_data = _Db.places.FirstOrDefault(e => e.PlaceID == model.PlaceID);
-                if (place_data == null) { return NotFound(); }
-                place_data.Name = model.Name;
-                place_data.Description = model.Description;
-                place_data.Location = model.Location;
-                place_data.Rating = model.Rating;
-                place_data.User_Id = model.User_Id;
-                
+            var place = _Db.places.FirstOrDefault(p => p.PlaceID == model.PlaceID);
+            if (place == null) return NotFound();
 
-                _Db.SaveChanges();
-                return RedirectToAction("index");
+            place.Name = model.Name;
+            place.Description = model.Description;
+            place.Location = model.Location;
+            place.Rating = model.Rating;
+            place.PriceLevel = model.PriceLevel;
+            place.User_Id = model.User_Id;
+            place.CategoryName = model.CategoryName;
 
-            }
-            //ViewBag.part = new SelectList(_Db.Users, "User_Id", "User_Name", model.User_Id);
-            //return View(model);
+            if (File != null)
+                place.Place_Image = UploadImage(File);
+
+            _Db.SaveChanges();
+            return RedirectToAction("Index");
         }
-        public IActionResult Amman()
+
+        [HttpGet]
+        public IActionResult Delete(int id)
         {
-            return View();
+            var place = _Db.places.Include(p => p.Users).FirstOrDefault(p => p.PlaceID == id);
+            if (place == null) return NotFound();
+            return View(place);
         }
-       public IActionResult Maan()
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult ConfirmDelete(int id)
         {
-            return View();
+            var place = _Db.places.Find(id);
+            if (place == null) return NotFound();
+
+            _Db.places.Remove(place);
+            _Db.SaveChanges();
+            return RedirectToAction("Index");
         }
-        public IActionResult Aqaba()
+
+        [HttpGet]
+        public IActionResult PlacesByCategory(string city, string category)
         {
-            return View();
+            if (string.IsNullOrEmpty(city) || string.IsNullOrEmpty(category))
+                return NotFound();
+
+            var data = _Db.places
+                .Where(p => p.Location.ToLower() == city.ToLower() && p.CategoryName.ToLower() == category.ToLower())
+                .ToList();
+
+            ViewBag.City = city;
+            ViewBag.Category = category;
+
+            return View(data);
         }
-      public IActionResult zarqa()
+        public IActionResult MaanPlaces()
         {
-            return View();
+            var places = _Db.places
+                .Where(p => p.Location.ToLower() == "maan" &&
+                            (p.CategoryName.ToLower() == "restaurant" ||
+                             p.CategoryName.ToLower() == "cafe" ||
+                             p.CategoryName.ToLower() == "hotel"))
+                .ToList();
+
+            return View(places); 
         }
-        public IActionResult ResturantAmman()
-        {
-            return View();
-        }
-        public IActionResult CafeesAmman() 
-        {
-            return View();
-        }
-        public IActionResult HotelAmman()
-        {
-            return View();
-        }
-        public IActionResult EntertainmentAmman()
-        {  return View();}
-        public IActionResult ShoppingCentersAmman()
-        { return View();}
-        public IActionResult TouristPlacesAmman()
-        { return View(); }
-        public IActionResult EntertainmentAqaba()
-        { return View(); }
+
+
+
+        public IActionResult Amman() => View();
+        public IActionResult Aqaba() => View();
+        public IActionResult Maan() => View();
+        public IActionResult Zarqa() => View();
     }
 }
-
-

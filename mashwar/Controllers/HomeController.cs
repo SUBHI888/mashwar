@@ -16,6 +16,7 @@ namespace mashwar.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 
@@ -28,8 +29,10 @@ namespace mashwar.Controllers
                 );
             return LocalRedirect(returnurl ?? "/");
         }
-    
+        public IActionResult Login() => View();
 
-        
+
+
+
     }
 }

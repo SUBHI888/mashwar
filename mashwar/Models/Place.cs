@@ -27,6 +27,12 @@ namespace mashwar.Models
         [ForeignKey("User_Id")]
         public AppUser Users { get; set; }
 
+       
+        public string ? CategoryName { get; set; }  
+
+
+
+
         public ICollection<Review> Reviews { get; set; }
         public ICollection<Booking> Bookings { get; set; }
         public ICollection<WorkTime> WorkTimes { get; set; }

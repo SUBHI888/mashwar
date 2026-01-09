@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="pageTitle">مطعم الدمشقي - معان</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #37343f;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #B87425;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .restaurant-name {
+            font-size: 42px;
+            font-weight: bold;
+        }
+
+        .restaurant-location {
+            font-size: 18px;
+            opacity: .9;
+        }
+
+        .lang-btn {
+            margin-top: 15px;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background: #fff;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .main-image img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .info-card h2 {
+            border-bottom: 3px solid #f39c12;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .features {
+            background: linear-gradient(135deg, #b7b682, #212023);
+            color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, .15);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .menu-highlights {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .menu-item {
+            border: 2px solid #eee;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .reserve-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .reserve-btn {
+            padding: 20px 60px;
+            font-size: 24px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #b7b682, #1f1e1e);
+            color: #fff;
+        }
+
+        @media(max-width:768px) {
+
+            .info-grid,
+            .features-grid,
+            .menu-items {
+                grid-template-columns: 1fr
+            }
+
+            .restaurant-name {
+                font-size: 32px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1 class="restaurant-name" data-key="restaurantName">🍽️ مطعم الدمشقي 🍽️</h1>
+        <p class="restaurant-location" data-key="location">📍 معان - الأردن</p>
+        <button id="langToggle" class="lang-btn">AR / EN</button>
+    </header>
+
+    <div class="container">
+
+        <div class="main-image">
+            <img src="picture/demashqi2.webp" alt="مطعم الدمشقي">
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h2 data-key="aboutTitle">📖 نبذة عن المطعم</h2>
+                <p data-key="aboutText">
+                    المطعم يجمع بين بيع اللحوم الطازجة وتقديم الوجبات المطبوخة بجودة عالية.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h2 data-key="contactTitle">📞 معلومات التواصل</h2>
+                <p><strong data-key="phone">📱 الهاتف:</strong> 0776911901</p>
+                <p><strong data-key="email">📧 البريد:</strong> info@aldemashqi-maan.jo</p>
+                <p><strong data-key="address">📍 العنوان:</strong> شارع الجامعة – معان</p>
+            </div>
+
+            <div class="info-card">
+                <h2 data-key="hoursTitle">🕐 ساعات العمل</h2>
+                <p data-key="hours1">السبت - الخميس: 10 صباحاً – 12 ليلاً</p>
+                <p data-key="hours2">الجمعة: 12 ظهراً – 12 ليلاً</p>
+            </div>
+
+            <div class="info-card">
+                <h2 data-key="specialties">⭐ التخصصات</h2>
+                <ul>
+                    <li data-key="sp1">الأرز</li>
+                    <li data-key="sp2">البيتزا</li>
+                    <li data-key="sp3">المقبلات الشرقية</li>
+                    <li data-key="sp4">الوجبات السريعة</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2 data-key="featuresTitle">✨ مميزات المطعم ✨</h2>
+            <div class="features-grid">
+                <div class="feature-item" data-key="f1">👨‍👩‍👧‍👦 قاعات عائلية</div>
+                <div class="feature-item" data-key="f2">🅿️ موقف سيارات</div>
+                <div class="feature-item" data-key="f3">🚗 توصيل</div>
+            </div>
+        </div>
+
+        <div class="menu-highlights">
+            <h2 data-key="menuTitle">🍴 أشهر الأطباق</h2>
+            <div class="menu-items">
+                <div class="menu-item" data-key="m1">🍚 الأرز</div>
+                <div class="menu-item" data-key="m2">🍕 البيتزا</div>
+                <div class="menu-item" data-key="m3">🥙 المقبلات</div>
+                <div class="menu-item" data-key="m4">🍗 الشاورما</div>
+            </div>
+        </div>
+
+        <div class="reserve-section">
+            <a href="eserve.html">
+                <button class="reserve-btn" data-key="reserve">احجز طاولتك الآن 🎯</button></a>
+        </div>
+
+    </div>
+
+    <script>
+        const texts = {
+            ar: {
+                pageTitle: "مطعم الدمشقي - معان",
+                restaurantName: "🍽️ مطعم الدمشقي 🍽️",
+                location: "📍 معان - الأردن",
+                aboutTitle: "📖 نبذة عن المطعم",
+                aboutText: "المطعم يجمع بين بيع اللحوم الطازجة وتقديم الوجبات المطبوخة بجودة عالية.",
+                contactTitle: "📞 معلومات التواصل",
+                phone: "📱 الهاتف:",
+                email: "📧 البريد:",
+                address: "📍 العنوان:",
+                hoursTitle: "🕐 ساعات العمل",
+                hours1: "السبت - الخميس: 10 صباحاً – 12 ليلاً",
+                hours2: "الجمعة: 12 ظهراً – 12 ليلاً",
+                specialties: "⭐ التخصصات",
+                sp1: "الأرز",
+                sp2: "البيتزا",
+                sp3: "المقبلات الشرقية",
+                sp4: "الوجبات السريعة",
+                featuresTitle: "✨ مميزات المطعم ✨",
+                f1: "👨‍👩‍👧‍👦 قاعات عائلية",
+                f2: "🅿️ موقف سيارات",
+                f3: "🚗 توصيل",
+                menuTitle: "🍴 أشهر الأطباق",
+                m1: "🍚 الأرز",
+                m2: "🍕 البيتزا",
+                m3: "🥙 المقبلات",
+                m4: "🍗 الشاورما",
+                reserve: "احجز طاولتك الآن 🎯"
+            },
+            en: {
+                pageTitle: "Al Dimashqi Restaurant - Ma'an",
+                restaurantName: "🍽️ Al Dimashqi Restaurant 🍽️",
+                location: "📍 Ma'an - Jordan",
+                aboutTitle: "📖 About the Restaurant",
+                aboutText: "The restaurant offers fresh meat and high-quality cooked meals.",
+                contactTitle: "📞 Contact Information",
+                phone: "📱 Phone:",
+                email: "📧 Email:",
+                address: "📍 Address:",
+                hoursTitle: "🕐 Working Hours",
+                hours1: "Sat - Thu: 10 AM – 12 AM",
+                hours2: "Friday: 12 PM – 12 AM",
+                specialties: "⭐ Specialties",
+                sp1: "Rice",
+                sp2: "Pizza",
+                sp3: "Oriental Appetizers",
+                sp4: "Fast Food",
+                featuresTitle: "✨ Restaurant Features ✨",
+                f1: "👨‍👩‍👧‍👦 Family Halls",
+                f2: "🅿️ Parking",
+                f3: "🚗 Delivery",
+                menuTitle: "🍴 Popular Dishes",
+                m1: "🍚 Rice",
+                m2: "🍕 Pizza",
+                m3: "🥙 Appetizers",
+                m4: "🍗 Shawarma",
+                reserve: "Reserve Your Table 🎯"
+            }
+        };
+
+        let currentLang = "ar";
+
+        function applyLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+            document.querySelectorAll("[data-key]").forEach(el => {
+                const key = el.dataset.key;
+                if (texts[lang][key]) el.textContent = texts[lang][key];
+            });
+        }
+
+        document.getElementById("langToggle").onclick = () => {
+            currentLang = currentLang === "ar" ? "en" : "ar";
+            applyLanguage(currentLang);
+        };
+
+        applyLanguage("ar");
+    </script>
+
+</body>
+
+</html>

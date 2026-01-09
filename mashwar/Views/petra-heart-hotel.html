@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فندق قلب البتراء - الأردن</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; background-color:#2b2f33; line-height:1.6; }
+
+    header { background-color:#c2b8a4; color:#222; padding:20px 0; box-shadow:0 2px 10px rgba(0,0,0,.15); position:relative; }
+    .header-content { max-width:1200px; margin:0 auto; padding:0 20px; text-align:center; }
+    .hotel-name { font-size:42px; font-weight:bold; margin-bottom:5px; color:#1f1f1f; }
+    .hotel-location { font-size:18px; color:#333; }
+
+    .lang-btn {
+      position:absolute;
+      top:20px;
+      right:20px;
+      background:#fff;
+      border:2px solid #1f1f1f;
+      padding:10px 20px;
+      font-size:16px;
+      font-weight:bold;
+      color:#1f1f1f;
+      border-radius:25px;
+      cursor:pointer;
+      transition:all 0.3s ease;
+      box-shadow:0 2px 8px rgba(0,0,0,.15);
+    }
+    .lang-btn:hover {
+      background:#1f1f1f;
+      color:#fff;
+      transform:scale(1.05);
+    }
+    [dir="ltr"] .lang-btn {
+      right:auto;
+      left:20px;
+    }
+
+    .container { max-width:1200px; margin:40px auto; padding:0 20px; }
+
+    .main-image { width:100%; height:520px; border-radius:15px; overflow:hidden; margin-bottom:40px; box-shadow:0 5px 20px rgba(0,0,0,.25); }
+    .main-image img { width:100%; height:100%; object-fit:cover; }
+
+    .info-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:30px; margin-bottom:40px; }
+    .info-card { background:#fff; padding:30px; border-radius:15px; box-shadow:0 3px 15px rgba(0,0,0,.12); }
+    .info-card h2 { color:#2c3e50; font-size:24px; margin-bottom:15px; border-bottom:3px solid #c2b8a4; padding-bottom:10px; }
+    .info-card p,.info-card ul { color:#555; font-size:16px; margin:10px 0; }
+    .info-card ul { list-style-position:inside; }
+
+    .contact-info { display:flex; align-items:center; gap:10px; margin:15px 0; flex-wrap:wrap; }
+    .contact-icon { font-size:20px; color:#8a7f6b; }
+
+    .hours-row { display:flex; justify-content:space-between; gap:10px; padding:10px; border-bottom:1px solid #eee; flex-wrap:wrap; }
+    .hours-row:last-child { border-bottom:none; }
+
+    .features { background:linear-gradient(135deg,#c2b8a4 0%, #1e2428 100%); padding:40px; border-radius:15px; margin-bottom:40px; color:#fff; }
+    .features h2 { font-size:28px; margin-bottom:20px; text-align:center; }
+    .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; text-align:center; }
+    .feature-item { background:rgba(255,255,255,.12); padding:20px; border-radius:10px; transition:transform .3s ease; }
+    .feature-item:hover { transform:translateY(-5px); background:rgba(255,255,255,.18); }
+    .feature-icon { font-size:40px; margin-bottom:10px; }
+
+    .rooms { background:#fff; padding:40px; border-radius:15px; box-shadow:0 3px 15px rgba(0,0,0,.12); margin-bottom:40px; }
+    .rooms h2 { color:#2c3e50; font-size:28px; margin-bottom:20px; text-align:center; border-bottom:3px solid #c2b8a4; padding-bottom:15px; }
+    .room-items { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+    .room-item { padding:20px; border:2px solid #ecf0f1; border-radius:10px; transition:all .3s ease; }
+    .room-item:hover { border-color:#c2b8a4; box-shadow:0 5px 15px rgba(194,184,164,.35); }
+    .room-item h3 { color:#2c3e50; margin-bottom:10px; font-size:20px; }
+    .room-item p { color:#666; font-size:14px; }
+
+    .reserve-section { text-align:center; margin:40px 0; }
+    .reserve-btn {
+      background:linear-gradient(135deg,#c2b8a4 0%, #1f1e1e 100%);
+      color:#fff; border:none; padding:20px 60px; font-size:24px; font-weight:bold;
+      border-radius:50px; cursor:pointer; box-shadow:0 5px 20px rgba(194,184,164,.45);
+      transition:all .3s ease;
+    }
+    .reserve-btn:hover { transform:translateY(-3px); box-shadow:0 8px 25px rgba(255,255,255,.18); }
+
+    a { color:#0b63ce; }
+
+    @media (max-width:768px) {
+      .info-grid { grid-template-columns:1fr; }
+      .features-grid { grid-template-columns:1fr; }
+      .room-items { grid-template-columns:1fr; }
+      .hotel-name { font-size:32px; }
+      .main-image { height:320px; }
+      .lang-btn { position:static; margin:10px auto; display:block; width:fit-content; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="lang-btn" onclick="toggleLanguage()">AR/EN</button>
+
+    <div class="header-content">
+      <h1 class="hotel-name" id="hotelName">فندق قلب البتراء</h1>
+      <p class="hotel-location" id="hotelLocation">📍 الأردن</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="main-image">
+      <img src="picture/Petra heart hotel.jpeg" alt="Petra Heart Hotel">
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h2 id="aboutTitle">📖 نبذة عن الفندق</h2>
+        <p id="aboutText1">فندق يوفر إقامة مريحة وخدمات أساسية للنزلاء.</p>
+        <p id="aboutText2">يمكنك تعديل هذه المعلومات لاحقًا (الوصف، العنوان، رقم الهاتف، رابط الحجز).</p>
+      </div>
+
+      <div class="info-card">
+        <h2 id="contactTitle">📞 معلومات التواصل</h2>
+
+        <div class="contact-info">
+          <span class="contact-icon">📱</span>
+          <p><strong id="mobileLabel">الموبايل:</strong> 07XXXXXXXX</p>
+        </div>
+
+        <div class="contact-info">
+          <span class="contact-icon">🌐</span>
+          <p>
+            <strong id="websiteLabel">الموقع/الحجز:</strong>
+            <a href="#" target="_blank" id="websiteLink">غير متوفر حالياً</a>
+          </p>
+        </div>
+
+        <div class="contact-info">
+          <span class="contact-icon">📍</span>
+          <p><strong id="addressLabel">العنوان:</strong> —</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h2 id="checkTitle">🕐 تسجيل الدخول والخروج</h2>
+        <div class="hours-row">
+          <span><strong id="checkinLabel">Check-in</strong></span>
+          <span id="checkinTime">2:00 مساءً</span>
+        </div>
+        <div class="hours-row">
+          <span><strong id="checkoutLabel">Check-out</strong></span>
+          <span id="checkoutTime">12:00 ظهرًا</span>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h2 id="servicesTitle">⭐ الخدمات</h2>
+        <ul>
+          <li id="service1">📶 واي فاي</li>
+          <li id="service2">🛏️ غرف متنوعة</li>
+          <li id="service3">🧳 استقبال</li>
+          <li id="service4">🅿️ موقف سيارات (حسب توفره)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="features">
+      <h2 id="featuresTitle">✨ مميزات الفندق ✨</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🛎️</div>
+          <h3 id="feature1Title">خدمة استقبال</h3>
+          <p id="feature1Desc">مساعدة للنزلاء</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🧼</div>
+          <h3 id="feature2Title">نظافة وترتيب</h3>
+          <p id="feature2Desc">عناية بالغرف</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📍</div>
+          <h3 id="feature3Title">موقع قريب</h3>
+          <p id="feature3Desc">سهل الوصول</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rooms">
+      <h2 id="roomsTitle">🛏️ أنواع الغرف</h2>
+      <div class="room-items">
+        <div class="room-item"><h3>Standard</h3><p id="room1Desc">غرفة ستاندرد مناسبة لفرد/شخصين</p></div>
+        <div class="room-item"><h3>Double / Twin</h3><p id="room2Desc">سرير مزدوج أو سريرين منفصلين</p></div>
+        <div class="room-item"><h3>Family</h3><p id="room3Desc">غرفة عائلية (حسب التوفر)</p></div>
+        <div class="room-item"><h3>Suite</h3><p id="room4Desc">جناح (حسب التوفر)</p></div>
+      </div>
+    </div>
+
+    <div class="reserve-section">
+      <button class="reserve-btn" onclick="makeReservation()" id="reserveBtn">احجز الآن 🎯</button>
+    </div>
+  </div>
+
+  <script>
+    let currentLang = 'ar';
+
+    const translations = {
+      ar: {
+        hotelName: 'فندق قلب البتراء',
+        hotelLocation: '📍 الأردن',
+        aboutTitle: '📖 نبذة عن الفندق',
+        aboutText1: 'فندق يوفر إقامة مريحة وخدمات أساسية للنزلاء.',
+        aboutText2: 'يمكنك تعديل هذه المعلومات لاحقًا (الوصف، العنوان، رقم الهاتف، رابط الحجز).',
+        contactTitle: '📞 معلومات التواصل',
+        mobileLabel: 'الموبايل:',
+        websiteLabel: 'الموقع/الحجز:',
+        websiteLink: 'غير متوفر حالياً',
+        addressLabel: 'العنوان:',
+        checkTitle: '🕐 تسجيل الدخول والخروج',
+        checkinLabel: 'Check-in',
+        checkoutLabel: 'Check-out',
+        checkinTime: '2:00 مساءً',
+        checkoutTime: '12:00 ظهرًا',
+        servicesTitle: '⭐ الخدمات',
+        service1: '📶 واي فاي',
+        service2: '🛏️ غرف متنوعة',
+        service3: '🧳 استقبال',
+        service4: '🅿️ موقف سيارات (حسب توفره)',
+        featuresTitle: '✨ مميزات الفندق ✨',
+        feature1Title: 'خدمة استقبال',
+        feature1Desc: 'مساعدة للنزلاء',
+        feature2Title: 'نظافة وترتيب',
+        feature2Desc: 'عناية بالغرف',
+        feature3Title: 'موقع قريب',
+        feature3Desc: 'سهل الوصول',
+        roomsTitle: '🛏️ أنواع الغرف',
+        room1Desc: 'غرفة ستاندرد مناسبة لفرد/شخصين',
+        room2Desc: 'سرير مزدوج أو سريرين منفصلين',
+        room3Desc: 'غرفة عائلية (حسب التوفر)',
+        room4Desc: 'جناح (حسب التوفر)',
+        reserveBtn: 'احجز الآن 🎯',
+        reserveMsg: 'للحجز والاستفسار:\n📱 07XXXXXXXX\n\n📍 —'
+      },
+      en: {
+        hotelName: 'Petra Heart Hotel',
+        hotelLocation: '📍 Jordan',
+        aboutTitle: '📖 About the Hotel',
+        aboutText1: 'A hotel providing comfortable accommodation and essential services for guests.',
+        aboutText2: 'You can modify this information later (description, address, phone number, booking link).',
+        contactTitle: '📞 Contact Information',
+        mobileLabel: 'Mobile:',
+        websiteLabel: 'Website/Booking:',
+        websiteLink: 'Not available currently',
+        addressLabel: 'Address:',
+        checkTitle: '🕐 Check-in & Check-out',
+        checkinLabel: 'Check-in',
+        checkoutLabel: 'Check-out',
+        checkinTime: '2:00 PM',
+        checkoutTime: '12:00 PM',
+        servicesTitle: '⭐ Services',
+        service1: '📶 WiFi',
+        service2: '🛏️ Various rooms',
+        service3: '🧳 Reception',
+        service4: '🅿️ Parking (subject to availability)',
+        featuresTitle: '✨ Hotel Features ✨',
+        feature1Title: 'Reception Service',
+        feature1Desc: 'Assistance for guests',
+        feature2Title: 'Cleanliness & Order',
+        feature2Desc: 'Room care',
+        feature3Title: 'Nearby Location',
+        feature3Desc: 'Easy access',
+        roomsTitle: '🛏️ Room Types',
+        room1Desc: 'Standard room suitable for 1-2 persons',
+        room2Desc: 'Double bed or twin beds',
+        room3Desc: 'Family room (subject to availability)',
+        room4Desc: 'Suite (subject to availability)',
+        reserveBtn: 'Book Now 🎯',
+        reserveMsg: 'For reservations and inquiries:\n📱 07XXXXXXXX\n\n📍 —'
+      }
+    };
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+
+      const html = document.documentElement;
+      html.setAttribute('lang', currentLang);
+      html.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+
+      for (let key in translations[currentLang]) {
+        const element = document.getElementById(key);
+        if (element) element.textContent = translations[currentLang][key];
+      }
+    }
+
+    function makeReservation() {
+      alert(translations[currentLang].reserveMsg);
+    }
+  </script>
+</body>
+</html>

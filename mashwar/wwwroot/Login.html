@@ -1,0 +1,476 @@
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <title>تسجيل / إنشاء حساب — Yalaa Tasheh</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark: #5c6eaf;
+            /* خلفية داكنة أساسية */
+            --mid: #6175a9;
+            /* لون متوسط */
+            --soft: #b0cbe1;
+            /* لون ناعم ثانوي */
+            --accent: #050634;
+            /* لون بيج فاتح للأزرار والنصوص */
+            --bg-glass: rgba(90, 138, 162, 0.25);
+            /* زجاجية خفيفة */
+            --white: #ffffff;
+            --muted: rgba(255, 255, 255, 0.9);
+            font-family: "Tajawal", system-ui, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-family);
+            background: radial-gradient(rgb(97, 117, 169, 0.5), rgb(97, 117, 169, 0.4)), url(" img/petraa.jpg") center/cover no-repeat fixed;
+            color: var(--muted);
+            direction: rtl;
+        }
+
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: var(--accent);
+            font-size: 20px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+            .lang-btn:hover {
+                background: rgba(255, 255, 255, 0.3);
+            }
+
+        /* ====== الصفحة والكارد ====== */
+        .page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            min-height: 650px;
+            display: flex;
+            justify-content: center;
+            /* توسيط أفقي */
+            align-items: center;
+            /* توسيط عمودي */
+
+            overflow: hidden;
+            border-radius: 100px;
+            --bg-glass: rgba(90, 138, 162, 0.25);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-lang {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            /* RTL */
+            z-index: 10;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+            .card-lang:hover {
+                transform: scale(1.05);
+            }
+
+        body.ltr .card-lang {
+            right: 20px;
+            left: auto;
+        }
+
+
+        .form {
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right {
+            display: none;
+        }
+
+
+        .title {
+            font-size: 36px;
+            margin-bottom: 25px;
+            text-align: center;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 14px;
+        }
+
+            .input-group label {
+                font-size: 18px;
+                color: var(--accent);
+                margin-bottom: 10px;
+            }
+
+            .input-group input {
+                height: 44px;
+                padding: 10px 14px;
+                border: none;
+                border-radius: 10px;
+                background: var(--white);
+                font-size: 15px;
+                color: #111;
+                outline: none;
+            }
+
+        .password {
+            position: relative;
+        }
+
+            .password .eye {
+                position: absolute;
+                top: 35px;
+                left: 10px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                font-size: 18px;
+                color: var(--soft);
+            }
+
+        .primary {
+            width: 100%;
+            background: var(--accent);
+            border: none;
+            height: 46px;
+            border-radius: 10px;
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+            .primary:hover {
+                background: #fff1cb;
+            }
+
+        .socials {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .social {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50px;
+            padding: 10px 0;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--dark);
+            transition: 0.3s;
+        }
+
+            .social:hover {
+                transform: translateY(-2px);
+                background: var(--accent);
+                color: var(--dark);
+            }
+
+            .social img {
+                width: 20px;
+                height: 20px;
+                object-fit: contain;
+            }
+
+        .help {
+            margin-top: 14px;
+            color: var(--accent);
+            text-align: center;
+        }
+
+            .help a {
+                color: var(--accent);
+                text-decoration: underline;
+                cursor: pointer;
+            }
+
+
+        body.ltr {
+            direction: ltr;
+        }
+
+            body.ltr .password .eye {
+                right: 10px;
+                left: auto;
+            }
+
+            body.ltr .title {
+                text-align: center;
+            }
+    </style>
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+
+
+            </button>
+        </div>
+    </header>
+
+    <main class="page">
+        <div class="card">
+            <button id="langToggle" class="lang-btn "> 🌐</button>
+
+            <div class="form login">
+                <h1 class="title" data-key="loginTitle">تسجيل دخول</h1>
+                <div class="input-group">
+                    <label for="loginEmail" data-key="emailLabel">البريد الإلكتروني</label>
+                    <input id="loginEmail" type="email" placeholder="البريد الإلكتروني"
+                           data-key-placeholder="emailPlaceholder" />
+                </div>
+                <div class="input-group password">
+                    <label for="loginPassword" data-key="passwordLabel">كلمة المرور</label>
+                    <input id="loginPassword" type="password" placeholder="كلمة المرور"
+                           data-key-placeholder="passwordPlaceholder" />
+                    <button class="eye">👁️</button>
+                </div>
+                <p class="forgot">
+                    <a href="reset-password.html" data-key="forgotPassword">نسيت كلمة المرور؟</a>
+                </p>
+
+                <button class="primary" id="loginBtn" data-key="loginBtn">تسجيل دخول</button>
+                <div class="or-line"><span data-key="or">أو</span></div>
+
+                <div class="socials">
+                    <button class="social google">
+                        <span data-key="withGoogle">تسجيل باستخدام Google</span>
+                    </button>
+                    <button class="social facebook">
+
+                        <span data-key="withFacebook">تسجيل باستخدام Facebook</span>
+                    </button>
+                </div>
+
+                <p class="help">
+                    <span data-key="noAccount">ليس لديك حساب؟</span>
+                    <a href="#" id="showSignup" data-key="signup">إنشاء حساب</a>
+                </p>
+            </div>
+
+            <div class="form signup" style="display:none;">
+                <h1 class="title" data-key="signupTitle">سجّل الآن</h1>
+                <div class="name-row">
+                    <div class="input-group">
+                        <label for="firstName" data-key="firstNameLabel">الاسم الأول</label>
+                        <input id="firstName" type="text" placeholder="الاسم الأول"
+                               data-key-placeholder="firstNamePlaceholder" />
+                    </div>
+
+                </div>
+                <div class="input-group">
+                    <label for="signupEmail" data-key="emailLabel">البريد الإلكتروني</label>
+                    <input id="signupEmail" type="email" placeholder="البريد الإلكتروني"
+                           data-key-placeholder="emailPlaceholder" />
+                </div>
+                <div class="input-group password">
+                    <label for="signupPassword" data-key="passwordLabel">كلمة المرور</label>
+                    <input id="signupPassword" type="password" placeholder="كلمة المرور"
+                           data-key-placeholder="passwordPlaceholder" />
+                    <button class="eye">👁️</button>
+                </div>
+                <div class="input-group password">
+                    <label for="confirmPassword" data-key="confirmPasswordLabel">تأكيد كلمة المرور</label>
+                    <input id="confirmPassword" type="password" placeholder="تأكيد كلمة المرور"
+                           data-key-placeholder="confirmPasswordPlaceholder" />
+                    <button class="eye">👁️</button>
+                </div>
+                <button class="primary" id="signupBtn" data-key="signupBtn">إنشاء حساب</button>
+                <div class="or-line"><span data-key="or">أو</span></div>
+
+                <div class="socials">
+                    <button class="social google">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="">
+                        <span data-key="withGoogle">سجّل باستخدام Google</span>
+                    </button>
+                    <button class="social facebook">
+
+                        <span data-key="withFacebook">سجّل باستخدام Facebook</span>
+                    </button>
+                </div>
+
+                <p class="help">
+                    <span data-key="haveAccount">هل لديك حساب بالفعل؟</span>
+                    <a href="#" id="showLogin" data-key="login">تسجيل دخول</a>
+                </p>
+            </div>
+
+            <div class="right" aria-hidden="true"></div>
+        </div>
+    </main>
+
+    <script>
+        const langBtn = document.getElementById('langToggle');
+        const body = document.body;
+        const texts = {
+            ar: {
+                loginTitle: "تسجيل دخول",
+                signupTitle: "إنشاء حساب",
+                emailLabel: "البريد الإلكتروني",
+                passwordLabel: "كلمة المرور",
+                confirmPasswordLabel: "تأكيد كلمة المرور",
+                firstNameLabel: "الاسم الأول",
+                lastNameLabel: "اسم العائلة",
+                firstNamePlaceholder: "الاسم الأول",
+                lastNamePlaceholder: "اسم العائلة",
+                emailPlaceholder: "البريد الإلكتروني",
+                passwordPlaceholder: "كلمة المرور",
+                confirmPasswordPlaceholder: "تأكيد كلمة المرور",
+                loginBtn: "تسجيل دخول",
+                signupBtn: "إنشاء حساب",
+                or: "أو",
+                withGoogle: "تسجيل باستخدام Google",
+                withFacebook: "تسجيل باستخدام Facebook",
+                noAccount: "ليس لديك حساب؟",
+                haveAccount: "هل لديك حساب بالفعل؟",
+                signup: "إنشاء حساب",
+                login: "تسجيل دخول",
+                forgotPassword: "نسيت كلمة المرور؟",
+                resetTitle: "إعادة تعيين كلمة المرور",
+                resetDesc: "أدخل بريدك الإلكتروني وكلمة المرور الجديدة لتحديث حسابك",
+                saveNewPassword: "حفظ كلمة المرور",
+                backToLogin: "العودة لتسجيل الدخول",
+                forgotPassword: "هل نسيت كلمة المرور؟",
+            },
+
+            en: {
+                loginTitle: "Login",
+                signupTitle: "Sign Up",
+                emailLabel: "Email",
+                passwordLabel: "Password",
+                confirmPasswordLabel: "Confirm Password",
+                firstNameLabel: "First Name",
+                lastNameLabel: "Last Name",
+                firstNamePlaceholder: "First Name",
+                lastNamePlaceholder: "Last Name",
+                emailPlaceholder: "Email",
+                passwordPlaceholder: "Password",
+                confirmPasswordPlaceholder: "Confirm Password",
+                loginBtn: "Login",
+                signupBtn: "Sign Up",
+                or: "OR",
+                withGoogle: "Sign in with Google",
+                withFacebook: "Sign in with Facebook",
+                noAccount: "Don't have an account?",
+                haveAccount: "Already have an account?",
+                signup: "Sign Up",
+                login: "Login",
+                forgotPassword: "Forgot Password?",
+                resetTitle: "Reset Password",
+                resetDesc: "Enter your email to receive a reset link",
+                sendReset: "Send Reset Link",
+                backToLogin: "Back to Login",
+                forgotPassword: "Forgot your password?",
+            }
+        };
+
+        let currentLang = 'ar';
+
+        function applyLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+            if (lang === 'en') body.classList.add('ltr');
+            else body.classList.remove('ltr');
+
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (key && texts[lang][key]) el.textContent = texts[lang][key];
+            });
+            document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-key-placeholder');
+                if (key && texts[lang][key]) el.placeholder = texts[lang][key];
+            });
+        }
+
+        langBtn.addEventListener('click', () => {
+            currentLang = (currentLang === 'ar') ? 'en' : 'ar';
+            applyLanguage(currentLang);
+        });
+        applyLanguage(currentLang);
+
+
+        const showSignup = document.getElementById('showSignup');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.querySelector('.form.login');
+        const signupForm = document.querySelector('.form.signup');
+
+        showSignup.addEventListener('click', e => {
+            e.preventDefault();
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'block';
+        });
+        showLogin.addEventListener('click', e => {
+            e.preventDefault();
+            signupForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        document.querySelectorAll('.password').forEach(group => {
+            const input = group.querySelector('input');
+            const eye = group.querySelector('.eye');
+            eye.addEventListener('click', () => {
+                input.type = (input.type === 'password') ? 'text' : 'password';
+            });
+        });
+
+
+
+    </script>
+</body>
+
+</html>

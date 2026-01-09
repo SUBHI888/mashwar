@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="img/logo.png" type="image/png">
+  <title>Privacy Policy</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Tajawal", sans-serif;
+      background: linear-gradient(135deg, #e6eef7, #f9fbfd);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #0F3057;
+    }
+
+    .policy-card {
+      width: 100%;
+      max-width: 650px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .lang-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      border: none;
+      background: #0F3057;
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .section {
+      margin-bottom: 18px;
+    }
+
+    .section h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .section p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<div class="policy-card">
+  <button class="lang-btn" onclick="toggleLang()">AR</button>
+
+  <h1 id="title">Privacy Policy</h1>
+
+  <div class="section">
+    <h3 id="h1">Information We Collect</h3>
+    <p id="p1">
+      We collect personal information such as name, email, and reservation details to provide our services.
+    </p>
+  </div>
+
+  <div class="section">
+    <h3 id="h2">How We Use Information</h3>
+    <p id="p2">
+      Information is used to manage reservations, improve user experience, and provide accurate recommendations.
+    </p>
+  </div>
+
+  <div class="section">
+    <h3 id="h3">User Reviews and Ratings</h3>
+    <p id="p3">
+      Reviews and ratings submitted by users are visible to the public to help others make informed decisions.
+    </p>
+  </div>
+
+  <div class="section">
+    <h3 id="h4">Data Protection</h3>
+    <p id="p4">
+      We apply security measures to protect user data from unauthorized access.
+    </p>
+  </div>
+
+  <div class="section">
+    <h3 id="h5">Third-Party Services</h3>
+    <p id="p5">
+      Some services may involve third-party providers such as payment or map services.
+    </p>
+  </div>
+
+  <div class="section">
+    <h3 id="h6">Policy Updates</h3>
+    <p id="p6">
+      This privacy policy may be updated periodically, and users will be notified of significant changes.
+    </p>
+  </div>
+
+</div>
+
+<script>
+  let isArabic = false;
+
+  function toggleLang() {
+    if (!isArabic) {
+      document.documentElement.dir = "rtl";
+      document.body.style.textAlign = "right";
+
+      document.getElementById("title").innerText = "سياسة الخصوصية";
+
+      document.getElementById("h1").innerText = "المعلومات التي نقوم بجمعها";
+      document.getElementById("p1").innerText = "نقوم بجمع معلومات شخصية مثل الاسم والبريد الإلكتروني وتفاصيل الحجوزات لتقديم خدماتنا.";
+
+      document.getElementById("h2").innerText = "كيفية استخدام المعلومات";
+      document.getElementById("p2").innerText = "تُستخدم المعلومات لإدارة الحجوزات وتحسين تجربة المستخدم وتقديم توصيات دقيقة.";
+
+      document.getElementById("h3").innerText = "التقييمات والمراجعات";
+      document.getElementById("p3").innerText = "تكون التقييمات والمراجعات التي يضيفها المستخدمون متاحة للعامة لمساعدة الآخرين.";
+
+      document.getElementById("h4").innerText = "حماية البيانات";
+      document.getElementById("p4").innerText = "نطبق إجراءات أمنية لحماية بيانات المستخدمين من الوصول غير المصرح به.";
+
+      document.getElementById("h5").innerText = "خدمات الطرف الثالث";
+      document.getElementById("p5").innerText = "قد تتضمن بعض الخدمات أطرافًا خارجية مثل خدمات الدفع أو الخرائط.";
+
+      document.getElementById("h6").innerText = "تحديثات السياسة";
+      document.getElementById("p6").innerText = "قد يتم تحديث سياسة الخصوصية بشكل دوري وسيتم إشعار المستخدمين بأي تغييرات مهمة.";
+
+      document.querySelector(".lang-btn").innerText = "EN";
+      isArabic = true;
+    } else {
+      document.documentElement.dir = "ltr";
+      document.body.style.textAlign = "left";
+
+      document.getElementById("title").innerText = "Privacy Policy";
+
+      document.getElementById("h1").innerText = "Information We Collect";
+      document.getElementById("p1").innerText = "We collect personal information such as name, email, and reservation details to provide our services.";
+
+      document.getElementById("h2").innerText = "How We Use Information";
+      document.getElementById("p2").innerText = "Information is used to manage reservations, improve user experience, and provide accurate recommendations.";
+
+      document.getElementById("h3").innerText = "User Reviews and Ratings";
+      document.getElementById("p3").innerText = "Reviews and ratings submitted by users are visible to the public to help others make informed decisions.";
+
+      document.getElementById("h4").innerText = "Data Protection";
+      document.getElementById("p4").innerText = "We apply security measures to protect user data from unauthorized access.";
+
+      document.getElementById("h5").innerText = "Third-Party Services";
+      document.getElementById("p5").innerText = "Some services may involve third-party providers such as payment or map services.";
+
+      document.getElementById("h6").innerText = "Policy Updates";
+      document.getElementById("p6").innerText = "This privacy policy may be updated periodically, and users will be notified of significant changes.";
+
+      document.querySelector(".lang-btn").innerText = "AR";
+      isArabic = false;
+    }
+  }
+</script>
+
+</body>
+</html>

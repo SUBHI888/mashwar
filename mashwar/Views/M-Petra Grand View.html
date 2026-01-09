@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petra Grand View Cafe & Restaurant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #37343f;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        header {
+            background-color: #000000;
+            color: rgb(0, 0, 0);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        /* زر الترجمة */
+        #translateBtn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #f39c12;
+            color: #201e1e;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        #translateBtn:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .restaurant-name {
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #f39c12;
+        }
+
+        .restaurant-location {
+            font-size: 18px;
+            color: #ecf0f1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #f39c12;
+            padding-bottom: 10px;
+        }
+
+        .info-card p,
+        .info-card ul {
+            color: #555;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .info-card ul {
+            list-style-position: inside;
+        }
+
+        .info-card li {
+            margin: 8px 0;
+            padding-right: 10px;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .contact-icon {
+            font-size: 20px;
+            color: #f39c12;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .features {
+            background: linear-gradient(135deg, #b7b682 0%, #212023 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .features h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .menu-highlights {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .menu-highlights h2 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid #f39c12;
+            padding-bottom: 15px;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .menu-item {
+            padding: 20px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            border-color: #f39c12;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.2);
+        }
+
+        .menu-item h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .reserve-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .reserve-btn {
+            background: linear-gradient(135deg, #b7b682 0%, #1f1e1e 100%);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(144, 136, 105, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .reserve-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(209, 208, 207, 0.6);
+        }
+
+        @media (max-width: 768px) {
+
+            .info-grid,
+            .features-grid,
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+
+            .restaurant-name {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <button id="translateBtn">English\عربي</button>
+            <h1 class="restaurant-name" data-ar="Petra Grand View Cafe & Restaurant"
+                data-en="Petra Grand View Cafe & Restaurant">Petra Grand View Cafe & Restaurant</h1>
+            <p class="restaurant-location" data-ar="📍 الطريق الرئيسي – وادي موسى (البتراء)، الأردن"
+                data-en="📍 Main Road – Wadi Musa (Petra), Jordan">
+                📍 الطريق الرئيسي – وادي موسى (البتراء)، الأردن
+            </p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-image">
+            <img src="Cafees Maan/petra.jpeg" alt="Petra Grand View Cafe">
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h2 data-ar="📖 نبذة عن المكان" data-en="📖 About the Place">📖 نبذة عن المكان</h2>
+                <p data-ar="كافيه ومطعم سياحي مميز في وادي موسى يتمتع بإطلالة بانورامية رائعة على جبال البتراء."
+                    data-en="A distinctive tourist cafe and restaurant in Wadi Musa with a stunning panoramic view of the Petra mountains.">
+                    كافيه ومطعم سياحي مميز في وادي موسى يتمتع بإطلالة بانورامية رائعة على جبال البتراء.
+                </p>
+                <p data-ar="مكان مثالي للاسترخاء، مشاهدة الغروب، والاستمتاع بالمشروبات والوجبات الخفيفة ☕🌄"
+                    data-en="Ideal place to relax, watch the sunset, and enjoy drinks and light meals ☕🌄">
+                    مكان مثالي للاسترخاء، مشاهدة الغروب، والاستمتاع بالمشروبات والوجبات الخفيفة ☕🌄
+                </p>
+            </div>
+
+            <div class="info-card">
+                <h2 data-ar="📞 معلومات التواصل" data-en="📞 Contact Info">📞 معلومات التواصل</h2>
+                <div class="contact-info">
+                    <span class="contact-icon">📱</span>
+                    <p data-ar="<strong>الهاتف:</strong> +962 7 7772 2142"
+                        data-en="<strong>Phone:</strong> +962 7 7772 2142"><strong>الهاتف:</strong> +962 7 7772 2142</p>
+                </div>
+                <div class="contact-info">
+                    <span class="contact-icon">📍</span>
+                    <p data-ar="<strong>العنوان:</strong> الطريق الرئيسي – وادي موسى، البتراء"
+                        data-en="<strong>Address:</strong> Main Road – Wadi Musa, Petra"> <strong>العنوان:</strong> Main
+                        Road – Wadi Musa، Petra</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h2 data-ar="🕐 أوقات العمل" data-en="🕐 Opening Hours">🕐 أوقات العمل</h2>
+                <div class="hours-row">
+                    <span data-ar="جميع أيام الأسبوع" data-en="All week">جميع أيام الأسبوع</span>
+                    <span data-ar="09:00 صباحاً – 02:00 بعد منتصف الليل" data-en="09:00 AM – 02:00 AM">09:00 صباحاً –
+                        02:00 بعد منتصف الليل</span>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h2 data-ar="⭐ التخصصات" data-en="⭐ Specialties">⭐ التخصصات</h2>
+                <ul>
+                    <li data-ar="☕ مشروبات قهوة ساخنة وباردة" data-en="☕ Hot & Cold Coffee Drinks">☕ مشروبات قهوة ساخنة
+                        وباردة</li>
+                    <li data-ar="🍹 عصائر طبيعية وكوكتيلات" data-en="🍹 Fresh Juices & Cocktails">🍹 عصائر طبيعية
+                        وكوكتيلات</li>
+                    <li data-ar="🍽️ وجبات خفيفة وأطباق متنوعة" data-en="🍽️ Light Meals & Various Dishes">🍽️ وجبات
+                        خفيفة وأطباق متنوعة</li>
+                    <li data-ar="💨 شيشة بنكهات متعددة" data-en="💨 Shisha with Multiple Flavors">💨 شيشة بنكهات متعددة
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2 data-ar="✨ مميزات المكان ✨" data-en="✨ Features ✨">✨ مميزات المكان ✨</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🌅</div>
+                    <h3 data-ar="إطلالة بانورامية" data-en="Panoramic View">إطلالة بانورامية</h3>
+                    <p data-ar="من أجمل إطلالات الغروب في وادي موسى"
+                        data-en="One of the most beautiful sunset views in Wadi Musa">من أجمل إطلالات الغروب في وادي
+                        موسى</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📶</div>
+                    <h3 data-ar="واي فاي مجاني" data-en="Free Wi-Fi">واي فاي مجاني</h3>
+                    <p data-ar="إنترنت متاح للزبائن" data-en="Internet available for customers">إنترنت متاح للزبائن</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                    <h3 data-ar="جلسات مريحة" data-en="Comfortable Seating">جلسات مريحة</h3>
+                    <p data-ar="مناسب للعائلات والأصدقاء" data-en="Suitable for families & friends">مناسب للعائلات
+                        والأصدقاء</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-highlights">
+            <h2 data-ar="🍴 أشهر الأصناف" data-en="🍴 Popular Items">🍴 أشهر الأصناف</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <h3 data-ar="قهوة عربية وإيطالية" data-en="Arabic & Italian Coffee">قهوة عربية وإيطالية</h3>
+                </div>
+                <div class="menu-item">
+                    <h3 data-ar="عصائر طبيعية" data-en="Fresh Juices">عصائر طبيعية</h3>
+                </div>
+                <div class="menu-item">
+                    <h3 data-ar="كوكتيلات غير كحولية" data-en="Non-alcoholic Cocktails">كوكتيلات غير كحولية</h3>
+                </div>
+                <div class="menu-item">
+                    <h3 data-ar="شيشة بنكهات متنوعة" data-en="Shisha with Various Flavors">شيشة بنكهات متنوعة</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="reserve-section">
+            <a href="eserve.html">
+                <button class="reserve-btn" data-ar="احجز طاولتك الآن 🎯" data-en="Reserve Your Table Now 🎯">احجز
+                    طاولتك الآن 🎯</button>
+            </a>
+        </div>
+
+        <script>
+            const btn = document.getElementById('translateBtn');
+            let isArabic = true;
+
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('[data-ar]').forEach(el => {
+                    el.innerHTML = isArabic ? el.getAttribute('data-en') : el.getAttribute('data-ar');
+                });
+                isArabic = !isArabic;
+            });
+        </script>
+
+</body>
+
+</html>

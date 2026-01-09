@@ -1,0 +1,44 @@
+﻿@model mashwar.Models.Booking
+@{
+    ViewData["Title"] = "حجز مكان";
+}
+
+<h2>حجز مكان</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label>اختر المكان:</label>
+        <select asp-for="PlaceId" asp-items="ViewBag.Places" class="form-control"></select>
+        <span asp-validation-for="PlaceId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>التاريخ:</label>
+        <input asp-for="BookingDate" type="date" class="form-control" />
+        <span asp-validation-for="BookingDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>الوقت:</label>
+        <input asp-for="BookingTime" type="time" class="form-control" />
+        <span asp-validation-for="BookingTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>عدد الأشخاص:</label>
+        <input asp-for="NumberOfPeople" type="number" class="form-control" min="1" />
+        <span asp-validation-for="NumberOfPeople" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>مكان الطاولة:</label>
+        <select asp-for="TableLocation" asp-items="ViewBag.TableLocations" class="form-control"></select>
+        <span asp-validation-for="TableLocation" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">تأكيد الحجز</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

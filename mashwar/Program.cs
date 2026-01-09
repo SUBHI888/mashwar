@@ -1,100 +1,102 @@
 ﻿using mashwar.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
-#region Conect_To_Database
-builder.Services.AddDbContext<AppDbContext>(option=>option.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"))
-    );
-#endregion
-#region Language
-builder.Services.AddLocalization(option=>option.ResourcesPath= "Resourses");
-builder.Services.Configure<RequestLocalizationOptions>(option =>
-{
-    var SuportedLanguage = new[]
-    { new CultureInfo("en"),
-     new CultureInfo("ar")
-    };
-    option.DefaultRequestCulture = new RequestCulture("en");
-    option.SupportedCultures = SuportedLanguage;
-    option.SupportedUICultures = SuportedLanguage;
-}
+
+#region Connect_To_Database
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"))
 );
 #endregion
-#region Identity
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(
-    Options =>
+
+#region Language
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resourses");
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedLanguages = new[]
     {
-        Options.Password.RequiredLength = 8;
-        Options.Password.RequireNonAlphanumeric = true;
-         Options.Password.RequireUppercase = true;
-        Options.User.RequireUniqueEmail = true;
-    }).AddEntityFrameworkStores<AppDbContext>();
+        new CultureInfo("en"),
+        new CultureInfo("ar")
+    };
+    options.DefaultRequestCulture = new RequestCulture("en");
+    options.SupportedCultures = supportedLanguages;
+    options.SupportedUICultures = supportedLanguages;
+});
+#endregion
+
+#region Identity
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    options.Password.RequiredLength = 8;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.User.RequireUniqueEmail = true;
+})
+.AddEntityFrameworkStores<AppDbContext>()
+.AddDefaultTokenProviders(); // 👈 مهم جداً لتوليد توكن إعادة تعيين كلمة السر
+
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddMemoryCache();
+
+// Configure Cookie
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.AccessDeniedPath = "/User/AccessDenied";
     options.Cookie.Name = "cookie";
     options.Cookie.HttpOnly = true;
     options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-    options.LoginPath="/User/Login";
-    options.ReturnUrlParameter= CookieAuthenticationDefaults.ReturnUrlParameter;
-}
-);
-#endregion
-#region login with google
-
-var google = builder.Configuration.GetSection("Authentication:Google");
-builder.Services.AddAuthentication().AddGoogle(Options =>
-{
-    Options.ClientId = google["ClientId"]!;
-    Options.ClientSecret = google["ClientSecret"]!;
-    Options.CallbackPath = "/signin-google";
+    options.LoginPath = "/User/Login";
+    options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
 });
 #endregion
 
+#region Email Sender
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+#endregion
 
-
-
-// Add services to the container.
+// Add services to the container
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-//app.UseAuthentication();
-//app.UseAuthorization();
 
-// Configure the HTTP request pipeline.
+// Configure middleware pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+}
+else
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-var localizationoption = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
-app.UseRequestLocalization(localizationoption!.Value);
 
-
+// Localization
+var localizationOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
+app.UseRequestLocalization(localizationOptions!.Value);
 
 app.UseRouting();
 app.UseSession();
 
+// Identity Authentication
 app.UseAuthentication();
 app.UseAuthorization();
 
-
-
-
+// Map Controllers
+app.MapControllers();
 
 app.MapControllerRoute(
     name: "default",

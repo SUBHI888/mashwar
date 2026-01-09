@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="img/logo.png" type="image/png">
+  <title>FAQ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Tajawal", sans-serif;
+      background: linear-gradient(135deg, #e6eef7, #f9fbfd);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #0F3057;
+    }
+
+    .faq-card {
+      width: 100%;
+      max-width: 650px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .lang-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      border: none;
+      background: #0F3057;
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .faq-item {
+      margin-bottom: 18px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e1e7f0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .question {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .answer {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<div class="faq-card">
+  <button class="lang-btn" onclick="toggleLang()">AR</button>
+
+  <h1 id="title">Frequently Asked Questions</h1>
+
+  <div class="faq-item">
+    <div class="question" id="q1">What is the purpose of this platform?</div>
+    <div class="answer" id="a1">
+      This platform allows users to explore restaurants, cafes, hotels, tourist attractions, shopping, and entertainment places.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="question" id="q2">Can I make reservations through the platform?</div>
+    <div class="answer" id="a2">
+      Yes, users can make reservations for restaurants, cafes, hotels, and other available places.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="question" id="q3">Are user reviews and ratings available?</div>
+    <div class="answer" id="a3">
+      Yes, users can view ratings and reviews and also submit their own feedback.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="question" id="q4">Who can use this system?</div>
+    <div class="answer" id="a4">
+      The system can be used by visitors, registered users, business owners, and administrators.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="question" id="q5">Can business owners manage their listings?</div>
+    <div class="answer" id="a5">
+      Yes, owners can manage their information, services, availability, and reservations.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="question" id="q6">Is the information on the platform reliable?</div>
+    <div class="answer" id="a6">
+      The platform relies on verified listings and user feedback to ensure accuracy.
+    </div>
+  </div>
+
+</div>
+
+<script>
+  let isArabic = false;
+
+  function toggleLang() {
+    if (!isArabic) {
+      document.documentElement.dir = "rtl";
+      document.body.style.textAlign = "right";
+
+      document.getElementById("title").innerText = "الأسئلة الشائعة";
+
+      document.getElementById("q1").innerText = "ما الهدف من هذه المنصة؟";
+      document.getElementById("a1").innerText = "تتيح المنصة للمستخدمين استكشاف المطاعم، الكافيهات، الفنادق، الأماكن السياحية، التسوق، والأماكن الترفيهية.";
+
+      document.getElementById("q2").innerText = "هل يمكنني إجراء حجوزات من خلال المنصة؟";
+      document.getElementById("a2").innerText = "نعم، يمكن للمستخدمين إجراء حجوزات للمطاعم، الكافيهات، الفنادق، والأماكن المتاحة.";
+
+      document.getElementById("q3").innerText = "هل تتوفر تقييمات ومراجعات المستخدمين؟";
+      document.getElementById("a3").innerText = "نعم، يمكن للمستخدمين مشاهدة التقييمات وكتابة مراجعاتهم الخاصة.";
+
+      document.getElementById("q4").innerText = "من يمكنه استخدام النظام؟";
+      document.getElementById("a4").innerText = "يمكن استخدام النظام من قبل الزوار، المستخدمين المسجلين، أصحاب الأعمال، ومديري النظام.";
+
+      document.getElementById("q5").innerText = "هل يمكن لأصحاب الأماكن إدارة صفحاتهم؟";
+      document.getElementById("a5").innerText = "نعم، يمكن لأصحاب الأماكن إدارة معلوماتهم، خدماتهم، الحجوزات، والتوفر.";
+
+      document.getElementById("q6").innerText = "هل المعلومات المعروضة موثوقة؟";
+      document.getElementById("a6").innerText = "تعتمد المنصة على أماكن موثوقة وتقييمات المستخدمين لضمان دقة المعلومات.";
+
+      document.querySelector(".lang-btn").innerText = "EN";
+      isArabic = true;
+    } else {
+      document.documentElement.dir = "ltr";
+      document.body.style.textAlign = "left";
+
+      document.getElementById("title").innerText = "Frequently Asked Questions";
+
+      document.getElementById("q1").innerText = "What is the purpose of this platform?";
+      document.getElementById("a1").innerText = "This platform allows users to explore restaurants, cafes, hotels, tourist attractions, shopping, and entertainment places.";
+
+      document.getElementById("q2").innerText = "Can I make reservations through the platform?";
+      document.getElementById("a2").innerText = "Yes, users can make reservations for restaurants, cafes, hotels, and other available places.";
+
+      document.getElementById("q3").innerText = "Are user reviews and ratings available?";
+      document.getElementById("a3").innerText = "Yes, users can view ratings and reviews and also submit their own feedback.";
+
+      document.getElementById("q4").innerText = "Who can use this system?";
+      document.getElementById("a4").innerText = "The system can be used by visitors, registered users, business owners, and administrators.";
+
+      document.getElementById("q5").innerText = "Can business owners manage their listings?";
+      document.getElementById("a5").innerText = "Yes, owners can manage their information, services, availability, and reservations.";
+
+      document.getElementById("q6").innerText = "Is the information on the platform reliable?";
+      document.getElementById("a6").innerText = "The platform relies on verified listings and user feedback to ensure accuracy.";
+
+      document.querySelector(".lang-btn").innerText = "AR";
+      isArabic = false;
+    }
+  }
+</script>
+
+</body>
+</html>

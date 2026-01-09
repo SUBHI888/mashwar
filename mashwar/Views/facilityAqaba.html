@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Facility-Aqaba</title>
+  <link rel="icon" href="img//logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #0F3057;
+      --bg-glass: rgba(255, 255, 255, 0.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 2px;
+      box-sizing: border-box;
+    }
+
+    a {
+      text-decoration: none;
+      color: #0F3057;
+      transition: 0.3s;
+    }
+
+    body {
+      background: url("subhi.mp4") center/cover no-repeat fixed;
+      color: var(--accent);
+      font-family: "Tajawal", sans-serif;
+      margin: 0;
+
+    }
+
+    .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: blur(1px);
+    }
+
+    .topbar {
+      background: var(--bg-glass);
+      backdrop-filter: blur(12px);
+
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .lang-btn {
+      padding: 8px 18px;
+      font-size: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      color: var(--accent);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .lang-btn:hover {
+      background: var(--accent);
+      color: #000;
+      transform: translateY(-2px);
+    }
+
+    .highlight {
+      outline: 3px solid var(--accent);
+      border-radius: 10px;
+      transition: outline 0.3s ease;
+    }
+
+    .menu-icon {
+      font-size: 28px;
+      color: var(--accent);
+      cursor: pointer;
+      padding: 5px 10px;
+      user-select: none;
+    }
+
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      width: 270px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      box-shadow: -3px 0 15px rgba(0, 0, 0, 0.25);
+      transition: 0.35s ease;
+      padding-top: 80px;
+      z-index: 2000;
+    }
+
+    html[dir="rtl"] .side-menu {
+      right: -270px;
+    }
+
+    html[dir="rtl"] .side-menu.open {
+      right: 0;
+    }
+
+    html[dir="ltr"] .side-menu {
+      left: -270px;
+    }
+
+    html[dir="ltr"] .side-menu.open {
+      left: 0;
+    }
+
+    .side-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .side-menu ul li {
+      padding: 15px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .side-menu ul li a {
+      text-decoration: none;
+      color: #222;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .side-menu ul li:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transition: 0.3s;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s ease;
+      z-index: 1500;
+    }
+
+    .overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 30px;
+      padding: 5px 10px;
+      width: 400px;
+    }
+
+    .search-container input {
+      border: none;
+      outline: none;
+      padding: 8px 10px;
+      flex: 1;
+      font-size: 20px;
+      border-radius: 20px;
+      background: transparent;
+    }
+
+    .search-container button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .header-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .primary.small,
+    .lang-btn {
+      padding: 8px 18px;
+      font-size: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      color: var(--accent);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .primary.small:hover,
+    .lang-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .page-content {
+      padding: 100px 60px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      width: 100%;
+      margin: auto;
+    }
+
+    .category {
+      background: var(--bg-glass);
+      border-radius: 16px;
+      text-align: center;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(12px);
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .category:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    .category img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+
+    .category p {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      margin: 10px 0 15px;
+    }
+
+    .menu-title {
+      margin: 0 10px 14px;
+      font-size: 22px;
+      font-weight: 600;
+      color: #111;
+    }
+
+    .glass-sidebar {
+      width: 240px;
+      padding: 18px 14px 14px;
+      background: linear-gradient(180deg,
+          rgba(255, 255, 255, .28),
+          rgba(255, 255, 255, .12));
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      border-radius: 22px 0 0 22px;
+      border: 1px solid rgba(255, 255, 255, .25);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+    }
+
+    .menu-title {
+      margin: 0 10px 14px;
+      font-size: 22px;
+      font-weight: 600;
+      color: #111;
+    }
+
+    .glass-sidebar ul li {
+      margin: 6px 0;
+      padding: 0;
+      border: none;
+    }
+
+    .glass-sidebar ul li a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .4);
+      border: 1px solid rgba(0, 0, 0, .05);
+      font-size: 16px;
+      color: #111;
+      transition: .25s ease;
+    }
+
+    .glass-sidebar ul li a::after {
+      content: '›';
+      opacity: .6;
+      font-size: 18px;
+    }
+
+    .glass-sidebar ul li a:hover {
+      background: rgba(255, 255, 255, .75);
+      transform: translateX(-4px);
+    }
+
+
+    .glass-sidebar .divider {
+      height: 1px;
+      background: rgba(0, 0, 0, .15);
+      margin: 14px 6px;
+    }
+
+    /* الفوتر */
+    .glass-sidebar .footer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, .55);
+      border-radius: 14px;
+      border: 1px solid rgba(0, 0, 0, .08);
+    }
+
+    .glass-sidebar .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #111, #444);
+    }
+
+    @media (max-width: 900px) {
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .categories {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .footer {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      margin-top: 80px;
+    }
+
+    .footer-content h2 {
+      color: #fff;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .contact-info {
+      color: #fff;
+      font-size: 16px;
+      margin-bottom: 25px;
+      line-height: 1.8;
+    }
+
+    .contact-info a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 15px;
+    }
+
+    .social-icon {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border-radius: 60%;
+      background-color: #ccc;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    /* روابط الصور من مجلدك */
+    .social-icon.fb {
+      background-image: url('images/fb-logo.png');
+    }
+
+    .social-icon.ig {
+      background-image: url('images/ig-logo.png');
+    }
+
+    .social-icon.wa {
+      background-image: url('images/wa-logo.png');
+    }
+
+    .social-icon:hover {
+      transform: scale(1.1);
+    }
+
+
+
+    .social-icon.fb {
+      background-image: url('img/FAC.jpg');
+    }
+
+    .social-icon.ig {
+      background-image: url('img/INST.jpg');
+    }
+
+    .social-icon.wa {
+      background-image: url('img/WHATS.jpg');
+    }
+
+    .social-icon.fb:hover {
+      background-image: url('img/FAC.jpg');
+    }
+
+    .social-icon.ig:hover {
+      background-image: url('img/INST.jpg');
+    }
+
+    .social-icon.wa:hover {
+      background-image: url('img/WHATS.jpg');
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="overlay" id="overlay"></div>
+
+  <nav class="side-menu glass-sidebar" id="sideMenu">
+    <h1 class="menu-title">القائمة</h1>
+
+    <ul>
+      <li><a href="home.html" data-key="homepage">الصفحة الرئيسية</a></li>
+      <li><a href="aboutAs.html" data-key="aboutUs">عن الموقع</a></li>
+      <li><a href="Frequently Asked Questions Page.html" data-key="FAQ">الأسئلة الشائعة </a></li>
+      <li><a href="privacy policy page.html" data-key="PrivacyPolicy">الحماية والخصوصية </a></li>
+      <li><a href="contactAs.html" data-key="contact">تواصل معنا</a></li>
+      <li><a href="login.html" data-key="loginBtn">تسجيل دخول</a></li>
+      <div class="divider"></div>
+      <div class="footer">
+        <div class="avatar"></div>
+        <div>
+          <div>حساب المستخدم</div>
+          <small>Premium</small>
+        </div>
+      </div>
+
+    </ul>
+  </nav>
+  <header class="topbar">
+
+    <div class="topbar-inner">
+
+      <div class="logo"> Yalaa Tasheh </div>
+
+      <div class="search-container">
+        <input type="text" placeholder="ابحث ..." />
+        <button>🔍</button>
+      </div>
+
+      <div class="header-buttons">
+        <a href="login.html">
+          <button id="loginBtn" data-key="loginBtn" class="primary small" onclick="window.location.href='login.html'">
+            تسجيل الدخول
+          </button></a>
+
+        <button id="langToggle" class="lang-btn">AR/EN</button>
+        <div class="menu-icon" id="menuToggle">☰</div>
+      </div>
+
+    </div>
+  </header>
+  <video class="bg-video" autoplay muted loop>
+    <source src="koko.mp4" type="video/mp4">
+  </video>
+  <main class="page-content">
+    <section class="categories">
+      <div class="category">
+        <a href="AqabaResturant.html">
+          <img src="img/rest.jpg" alt="مطاعم">
+          <p>مطاعم</p>
+        </a>
+      </div>
+      <div class="category">
+        <a href="AqabaCaffee.html">
+          <img src="img/coffee.jpg" alt="كافيهات">
+          <p>كافيهات</p>
+        </a>
+      </div>
+      <div class="category">
+        <a href="AqabaHotel.html">
+          <img src="img/hotel.jpg" alt="فنادق">
+          <p>فنادق</p>
+        </a>
+      </div>
+      <div class="category">
+        <a href="AqabaTourist.html">
+          <img src="img/مواقع سياحية.jpg" alt="اماكن سياحية">
+          <p>اماكن سياحية</p>
+        </a>
+      </div>
+      <div class="category">
+        <a href="AqabaShopping.html">
+          <img src="img/shopping.jpg" alt="مراكز تسوق">
+          <p>مراكز تسوق</p>
+        </a>
+      </div>
+      <div class="category">
+        <a href="AqabaEntermenent.html">
+          <img src="img/pool.jpg" alt="أماكن ترفيهية">
+          <p>أماكن ترفيهية</p>
+        </a>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="footer-content">
+      <h2 data-key="contactTitle">اتصل بنا</h2>
+
+      <div class="contact-info">
+        <p><strong data-key="phoneLabel">الهاتف:</strong> <span id="phoneNumber">+962 792690186 </span></p>
+        <p><strong data-key="emailLabel">البريد الإلكتروني:</strong> <a
+            href="mailto:layansirbel861@gmail.com">layansirbel861@gmail.com</a></p>
+        <p><strong data-key="locationLabel">الموقع:</strong> <span id="locationText">عمان، الأردن</span></p>
+      </div>
+
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank" class="social-icon fb" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" class="social-icon ig" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/9627972690186" target="_blank" class="social-icon wa" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </div>
+
+      <p class="copy">© 2025 Yalaa Tasheh — <span data-key="rights">جميع الحقوق محفوظة</span></p>
+    </div>
+  </footer>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+
+
+  <script>
+    const langBtn = document.getElementById('langToggle');
+    const body = document.body;
+    const texts = {
+      ar: {
+        homepage: "الصفحة الرئيسية",
+        aboutUs: "عن الموقع",
+        contact: "تواصل معنا",
+        FAQ: "لأسئلة الشائعة",
+        PrivacyPolicy: "الحماية والخصوصية",
+        loginBtn: "تسجيل الدخول",
+        restaurants: "مطاعم",
+        cafes: "كافيهات",
+        hotels: "فنادق",
+        tourism: "أماكن سياحية",
+        malls: "مراكز تسوق",
+        pools: "أماكن ترفيهية",
+        searchPlaceholder: "ابحث عن مطعم، فندق، كافيه...",
+        loginBtn: "تسجيل الدخول",
+        contactTitle: "اتصل بنا",
+        phoneLabel: "الهاتف:",
+        emailLabel: "البريد الإلكتروني:",
+        locationLabel: "الموقع:",
+        rights: "جميع الحقوق محفوظة",
+      },
+      en: {
+        homepage: "Home",
+        aboutUs: "About Us",
+        FAQ: "FAQ",
+        PrivacyPolicy: "privacy policy ",
+        contact: "Contact Us",
+        loginBtn: "Login",
+        restaurants: "Restaurants",
+        cafes: "Cafés",
+        hotels: "Hotels",
+        tourism: "Tourist Spots",
+        malls: "Shopping Malls",
+        pools: "Entertainment Places",
+        searchPlaceholder: "Search for restaurant, hotel, café...",
+        loginBtn: "Login",
+        contactTitle: "Contact Us",
+        phoneLabel: "Phone:",
+        emailLabel: "Email:",
+        locationLabel: "Location:",
+        rights: "All rights reserved",
+      }
+    };
+
+    let currentLang = 'ar';
+
+    function applyLanguage(lang) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      if (lang === 'en') body.classList.add('ltr');
+      else body.classList.remove('ltr');
+
+      const catText = document.querySelectorAll('.category p');
+      const searchInput = document.querySelector('.search-container input');
+      const loginBtn = document.querySelector('.primary.small');
+      const langSet = texts[lang];
+      const keys = ['restaurants', 'cafes', 'hotels', 'tourism', 'malls', 'pools'];
+
+      catText.forEach((el, i) => {
+        el.textContent = langSet[keys[i]];
+      });
+
+      if (searchInput) searchInput.placeholder = langSet.searchPlaceholder;
+      if (loginBtn) loginBtn.textContent = langSet.loginBtn;
+
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (key && texts[lang][key]) el.textContent = texts[lang][key];
+      });
+    }
+
+    langBtn.addEventListener('click', () => {
+      currentLang = (currentLang === 'ar') ? 'en' : 'ar';
+      applyLanguage(currentLang);
+    });
+
+    applyLanguage(currentLang);
+
+    const loginButton = document.getElementById('loginBtn');
+    let loggedIn = false;
+    if (loginButton) {
+      loginButton.addEventListener('click', () => {
+        if (!loggedIn) {
+          loggedIn = true;
+          loginButton.textContent = (currentLang === 'ar') ? 'تسجيل الخروج' : 'Logout';
+          loginButton.classList.add('logout');
+        } else {
+          loggedIn = false;
+          loginButton.textContent = (currentLang === 'ar') ? 'تسجيل الدخول' : 'Login';
+          loginButton.classList.remove('logout');
+        }
+      });
+    }
+
+    const socialButtons = document.querySelectorAll('.social-icon');
+    socialButtons.forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        const link = btn.getAttribute('href');
+        const platform = btn.classList.contains('fb') ? 'فيسبوك' :
+          btn.classList.contains('ig') ? 'إنستغرام' :
+            btn.classList.contains('wa') ? 'واتساب' : 'موقع آخر';
+        console.log(`تم الضغط على ${platform}`);
+        window.open(link, '_blank');
+      });
+    });
+
+  </script>
+
+</body>
+
+</html>

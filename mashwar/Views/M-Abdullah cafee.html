@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdullah Cafe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #37343f;
+            line-height: 1.6;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        header {
+            background-color: #000;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .restaurant-name {
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #f39c12;
+        }
+
+        .restaurant-location {
+            font-size: 18px;
+            color: #ecf0f1;
+        }
+
+        .lang-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #f39c12;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: white;
+            color: #000;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #f39c12;
+            padding-bottom: 10px;
+        }
+
+        .info-card p,
+        .info-card ul {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .info-card ul {
+            list-style-position: inside;
+        }
+
+        .info-card li {
+            margin: 8px 0;
+            padding-right: 10px;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .contact-icon {
+            font-size: 20px;
+            color: #f39c12;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .features {
+            background: linear-gradient(135deg, #b7b682 0%, #212023 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .features h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .menu-highlights {
+            background: white;
+            color: #000;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .menu-highlights h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid #f39c12;
+            padding-bottom: 15px;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .menu-item {
+            padding: 20px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            border-color: #f39c12;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.2);
+        }
+
+        .menu-item h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .reserve-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .reserve-btn {
+            background: linear-gradient(135deg, #b7b682 0%, #1f1e1e 100%);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(144, 136, 105, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .reserve-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(209, 208, 207, 0.6);
+        }
+
+        @media(max-width:768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+
+            .restaurant-name {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="lang-btn" onclick="toggleLanguage()">English / عربي</button>
+    <header>
+        <div class="header-content">
+            <h1 class="restaurant-name" data-ar="كافيه عبدالله – Abdullah Cafe" data-en="Abdullah Cafe">كافيه عبدالله –
+                </h1>
+            <p class="restaurant-location" data-ar="📍 معان، الأردن" data-en="📍 Ma'an, Jordan">📍 معان، الأردن</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-image">
+            <img src="Cafees Maan/Abdullah.jpeg" alt="Abdullah Cafe">
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h2 data-ar="📖 نبذة عن الكافيه" data-en="📖 About the Cafe">📖 نبذة عن الكافيه</h2>
+                <p data-ar="يوفّر المقهى تجربة ودّية..." data-en="The cafe offers a friendly experience...">يوفّر المقهى
+                    تجربة ودّية...</p>
+            </div>
+
+            <div class="info-card">
+                <h2 data-ar="📞 معلومات التواصل" data-en="📞 Contact Information">📞 معلومات التواصل</h2>
+                <div class="contact-info">
+                    <span class="contact-icon">📱</span>
+                    <p data-ar="<strong>الهاتف:</strong> 07 7744 4784" data-en="<strong>Phone:</strong> 07 7744 4784">
+                        <strong>الهاتف:</strong> 07 7744 4784</p>
+                </div>
+                <div class="contact-info" data-ar="📍 <strong>العنوان:</strong> Petra downtown, Wadi Musa 71810, Jordan"
+                    data-en="📍 <strong>Address:</strong> Petra downtown, Wadi Musa 71810, Jordan">
+                    📍 <strong>العنوان:</strong> Petra downtown, Wadi Musa 71810, Jordan
+                </div>
+                <div class="contact-info" data-ar="📘 <strong>فيسبوك:</strong> AbdullaCafeandRestaurent"
+                    data-en="📘 <strong>Facebook:</strong> AbdullaCafeandRestaurent">
+                    📘 <strong>فيسبوك:</strong> AbdullaCafeandRestaurent
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h2 data-ar="🕐 أوقات العمل" data-en="🕐 Working Hours">🕐 أوقات العمل</h2>
+                <div class="hours-row">
+                    <span data-ar="السبت - الخميس" data-en="Saturday - Thursday">السبت - الخميس</span>
+                    <span data-ar="08:00 صباحاً - 12:00 منتصف الليل" data-en="08:00 AM - 12:00 Midnight">08:00 صباحاً -
+                        12:00 منتصف الليل</span>
+                </div>
+                <div class="hours-row">
+                    <span data-ar="الجمعة" data-en="Friday">الجمعة</span>
+                    <span data-ar="08:00 صباحاً - 12:00 منتصف الليل" data-en="08:00 AM - 12:00 Midnight">08:00 صباحاً -
+                        12:00 منتصف الليل</span>
+                </div>
+                <div class="hours-row">
+                    <span data-ar="العطل الرسمية" data-en="Public Holidays">العطل الرسمية</span>
+                    <span data-ar="حسب الإعلان" data-en="As announced">حسب الإعلان</span>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h2 data-ar="⭐ التخصصات" data-en="⭐ Specialties">⭐ التخصصات</h2>
+                <ul>
+                    <li data-ar="☕ قهوة مميزة ومشروبات ساخنة" data-en="☕ Specialty coffee and hot drinks">☕ قهوة مميزة
+                        ومشروبات ساخنة</li>
+                    <li data-ar="💨 المأكولات السريعة" data-en="💨 Fast food items">💨 المأكولات السريعة</li>
+                    <li data-ar="🍹 مشروبات باردة ومنعشة" data-en="🍹 Refreshing cold beverages">🍹 مشروبات باردة ومنعشة
+                    </li>
+                    <li data-ar="🍰 حلويات خفيفة وسناكات" data-en="🍰 Light desserts and snacks">🍰 حلويات خفيفة وسناكات
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="reserve-section">
+            <button class="reserve-btn" data-ar="احجز طاولتك الآن ☕" data-en="Reserve Your Table Now ☕">احجز طاولتك الآن
+                ☕</button>
+        </div>
+    </div>
+
+    <script>
+        let lang = 'ar';
+        function toggleLanguage() {
+            lang = lang === 'ar' ? 'en' : 'ar';
+            document.querySelectorAll('[data-ar]').forEach(el => {
+                el.innerHTML = lang === 'ar' ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+            });
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        }
+    </script>
+</body>
+
+</html>

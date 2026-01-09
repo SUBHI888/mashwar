@@ -8,7 +8,6 @@ namespace mashwar.Models
         [Key]
         public int Id { get; set; }
 
-        // FK → Place
         [Required]
         public int PlaceId { get; set; }
 
@@ -17,7 +16,7 @@ namespace mashwar.Models
 
         [Required(ErrorMessage = "Day of week is required")]
         [StringLength(20)]
-        public string DayOfWeek { get; set; } // الأحد، الإثنين ... الخ
+        public string DayOfWeek { get; set; } 
 
         [Required]
         public TimeSpan OpeningTime { get; set; }
@@ -25,7 +24,7 @@ namespace mashwar.Models
         [Required]
         public TimeSpan ClosingTime { get; set; }
 
-        public bool IsClosed { get; set; } = false; // لتحديد إذا كان النشاط مغلق في هذا اليوم
+        public bool IsClosed { get; set; } = false;  
     }
 }
 

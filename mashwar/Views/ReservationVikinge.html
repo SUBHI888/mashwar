@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="pageTitle">مطعم فايكينج - معان</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma;
+            background: #37343f;
+            line-height: 1.6
+        }
+
+        header {
+            background: linear-gradient(to right, #d7d7d7, #f9c827);
+            padding: 20px 0;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .1)
+        }
+
+        .restaurant-name {
+            font-size: 42px;
+            font-weight: bold;
+            color: #fff
+        }
+
+        .restaurant-location {
+            font-size: 18px;
+            color: #ecf0f1
+        }
+
+        .lang-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 2px solid #fff;
+            background: rgba(255, 255, 255, .3);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer
+        }
+
+        [dir="ltr"] .lang-btn {
+            right: auto;
+            left: 20px
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px
+        }
+
+        .main-image img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            object-fit: contain
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px
+        }
+
+        .info-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px
+        }
+
+        .info-card h2 {
+            border-bottom: 3px solid #f39c12;
+            margin-bottom: 15px;
+            padding-bottom: 10px
+        }
+
+        .features {
+            background: linear-gradient(135deg, #b7b682, #212023);
+            color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center
+        }
+
+        .menu-highlights {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px
+        }
+
+        .menu-item {
+            border: 2px solid #ecf0f1;
+            padding: 20px;
+            border-radius: 10px
+        }
+
+        .reserve-section {
+            text-align: center;
+            margin: 40px 0
+        }
+
+        .reserve-btn {
+            background: linear-gradient(135deg, #b7b682, #1f1e1e);
+            color: #fff;
+            border: none;
+            padding: 20px 60px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer
+        }
+
+        @media(max-width:768px) {
+
+            .info-grid,
+            .features-grid,
+            .menu-items {
+                grid-template-columns: 1fr
+            }
+
+            .restaurant-name {
+                font-size: 32px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <button class="lang-btn" id="langToggle">AR / EN</button>
+        <h1 class="restaurant-name" data-key="name"></h1>
+        <p class="restaurant-location" data-key="location"></p>
+    </header>
+
+    <div class="container">
+
+        <div class="main-image">
+            <img src="picture/viking.jpg" alt="Viking Restaurant">
+        </div>
+
+        <div class="info-grid">
+
+            <div class="info-card">
+                <h2 data-key="aboutTitle"></h2>
+                <p data-key="about1"></p>
+                <p data-key="about2"></p>
+            </div>
+
+            <div class="info-card">
+                <h2 data-key="contactTitle"></h2>
+                <p><strong data-key="mobile"></strong> 0791557474</p>
+                <p><strong data-key="email"></strong> info@vikinge-maan.jo</p>
+                <p><strong data-key="address"></strong> <span data-key="addressText"></span></p>
+            </div>
+
+            <div class="info-card">
+                <h2 data-key="hoursTitle"></h2>
+                <p data-key="hours1"></p>
+                <p data-key="hours2"></p>
+                <p data-key="hours3"></p>
+            </div>
+
+            <div class="info-card">
+                <h2 data-key="specialties"></h2>
+                <ul>
+                    <li data-key="sp1"></li>
+                    <li data-key="sp2"></li>
+                    <li data-key="sp3"></li>
+                    <li data-key="sp4"></li>
+                    <li data-key="sp5"></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="features">
+            <h2 data-key="featuresTitle"></h2>
+            <div class="features-grid">
+                <div data-key="f1"></div>
+                <div data-key="f2"></div>
+                <div data-key="f3"></div>
+                <div data-key="f4"></div>
+                <div data-key="f5"></div>
+                <div data-key="f6"></div>
+            </div>
+        </div>
+
+        <div class="menu-highlights">
+            <h2 data-key="menuTitle"></h2>
+            <div class="menu-items">
+                <div data-key="m1"></div>
+                <div data-key="m2"></div>
+                <div data-key="m3"></div>
+            </div>
+        </div>
+
+        <div class="reserve-section">
+            <a href="eserve.html">
+                <button class="reserve-btn" data-key="reserve"></button>
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        const texts = {
+            ar: {
+                pageTitle: "مطعم فايكينج - معان",
+                name: "🍽️ مطعم فايكينج 🍽️",
+                location: "📍 معان - الأردن",
+                aboutTitle: "📖 نبذة عن المطعم",
+                about1: "مطعم فايكينج يقدم تشكيلة متنوعة من الوجبات السريعة والمميزة.",
+                about2: "خدمة ممتازة وطعام شهي في أجواء مريحة.",
+                contactTitle: "📞 معلومات التواصل",
+                mobile: "📱 الهاتف:",
+                email: "📧 البريد:",
+                address: "📍 العنوان:",
+                addressText: "مدينة معان - شارع الجامعة بالقرب من الإشارة الضوئية",
+                hoursTitle: "🕐 ساعات العمل",
+                hours1: "السبت - الخميس: 10 صباحاً – 12 ليلاً",
+                hours2: "الجمعة: 12 ظهراً – 12 ليلاً",
+                hours3: "العطل الرسمية: حسب الإعلان",
+                specialties: "⭐ التخصصات",
+                sp1: "المقبلات الشرقية",
+                sp2: "وجبات سريعة",
+                sp3: "سناكات",
+                sp4: "برجر",
+                sp5: "الشاورما",
+                featuresTitle: "✨ مميزات المطعم ✨",
+                f1: "👨‍👩‍👧‍👦 قاعات عائلية",
+                f2: "🅿️ موقف سيارات",
+                f3: "📶 واي فاي مجاني",
+                f4: "🚗 خدمة توصيل",
+                f5: "❄️ مكيف مركزي",
+                f6: "💳 طرق دفع متعددة",
+                menuTitle: "🍴 أشهر الأطباق",
+                m1: "🍔 البرجر – طازج ومليء بالنكهات",
+                m2: "🥙 المقبلات الشرقية",
+                m3: "🍗 الشاورما",
+                reserve: "احجز طاولتك الآن 🎯"
+            },
+            en: {
+                pageTitle: "Viking Restaurant - Ma'an",
+                name: "🍽️ Viking Restaurant 🍽️",
+                location: "📍 Ma'an - Jordan",
+                aboutTitle: "📖 About the Restaurant",
+                about1: "Viking Restaurant offers a variety of fast and tasty meals.",
+                about2: "Great service and delicious food in a comfortable atmosphere.",
+                contactTitle: "📞 Contact Information",
+                mobile: "📱 Phone:",
+                email: "📧 Email:",
+                address: "📍 Address:",
+                addressText: "Ma'an City - University Street near traffic light",
+                hoursTitle: "🕐 Working Hours",
+                hours1: "Sat - Thu: 10 AM – 12 AM",
+                hours2: "Friday: 12 PM – 12 AM",
+                hours3: "Holidays: As announced",
+                specialties: "⭐ Specialties",
+                sp1: "Oriental Appetizers",
+                sp2: "Fast Food",
+                sp3: "Snacks",
+                sp4: "Burgers",
+                sp5: "Shawarma",
+                featuresTitle: "✨ Restaurant Features ✨",
+                f1: "👨‍👩‍👧‍👦 Family Seating",
+                f2: "🅿️ Parking",
+                f3: "📶 Free WiFi",
+                f4: "🚗 Delivery Service",
+                f5: "❄️ Air Conditioning",
+                f6: "💳 Payment Methods",
+                menuTitle: "🍴 Popular Dishes",
+                m1: "🍔 Burgers",
+                m2: "🥙 Oriental Appetizers",
+                m3: "🍗 Shawarma",
+                reserve: "Book Your Table 🎯"
+            }
+        };
+
+        let lang = localStorage.getItem("lang") || "ar";
+        function applyLang(l) {
+            document.documentElement.lang = l;
+            document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
+            document.querySelectorAll("[data-key]").forEach(el => {
+                el.textContent = texts[l][el.dataset.key];
+            });
+            localStorage.setItem("lang", l);
+        }
+        applyLang(lang);
+        document.getElementById("langToggle").onclick = () => {
+            lang = lang === "ar" ? "en" : "ar"; applyLang(lang);
+        };
+    </script>
+
+</body>
+
+</html>

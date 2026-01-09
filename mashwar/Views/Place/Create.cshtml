@@ -7,47 +7,81 @@
 
 <form asp-action="Create" asp-controller="Place" method="post" enctype="multipart/form-data" role="form">
     @Html.AntiForgeryToken()
-    <div class="form-group">
-        <label asp-for="Name">Place_Name</label>
-        <input asp-for="Name" class="form-control" type="text" placeholder="Enter your place Name..." />
-        <span asp-validation-for="Name"></span>
-    </div>
-    <br />
-    <div class="form-group">
-        <label asp-for="Description">Place_Description</label>
-        <input asp-for="Description" class="form-control" type="text" placeholder="Enter your place Description..." />
-        <span asp-validation-for="Description"></span>
-    </div><br />
-    <div class="form-group">
-        <label asp-for="Location">Place_Location</label>
-        <input asp-for="Location" class="form-control" type="text" placeholder="Enter your place Location..." />
-        <span asp-validation-for="Location"></span>
-    </div><br />
-    <div class="form-group">
-        <label asp-for="Place_Image">Place_Image</label>
-        <input asp-for="Place_Image" type="file" name="File" placeholder="Enter Place Image..." class="form-control" />
-        <span asp-validation-for="Place_Image" class="text-danger"></span>
 
+    <!-- Place Name -->
+    <div class="form-group mb-3">
+        <label asp-for="Name">Place Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Enter your place Name..." />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
+
+    <!-- Description -->
+    <div class="form-group mb-3">
+        <label asp-for="Description">Place Description</label>
+        <input asp-for="Description" class="form-control" placeholder="Enter your place Description..." />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <!-- Location Dropdown -->
+    <div class="form-group mb-3">
+        <label asp-for="Location">Place Location</label>
+        <select asp-for="Location" class="form-select" asp-items="ViewBag.Cities">
+            <option value="">-- Select City --</option>
+            <option value="Amman">Amman</option>
+            <option value="Zarqa">Zarqa</option>
+            <option value="Aqaba">Aqaba</option>
+            <option value="Maan">Maan</option>
+        </select>
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+
+    <!-- Place Image -->
+    <div class="form-group mb-3">
+        <label asp-for="Place_Image">Place Image</label>
+        <input asp-for="Place_Image" type="file" name="File" class="form-control" />
+        <span asp-validation-for="Place_Image" class="text-danger"></span>
+    </div>
+
+    <!-- Rating -->
+    <div class="form-group mb-3">
+        <label asp-for="Rating">Place Rating</label>
+        <input asp-for="Rating" type="number" step="0.1" class="form-control" placeholder="Enter your place Rating..." />
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div>
+
+    <!-- Price Level -->
+    <div class="form-group mb-3">
+        <label asp-for="PriceLevel">Price Level</label>
+        <input asp-for="PriceLevel" class="form-control" placeholder="Enter your Price level..." />
+        <span asp-validation-for="PriceLevel" class="text-danger"></span>
+    </div>
+
+    <!-- User Dropdown -->
+    <div class="form-group mb-3">
+        <label asp-for="User_Id">User</label>
+        <select asp-for="User_Id" class="form-select" asp-items="@ViewBag.Users">
+            <option value="">-- Select User --</option>
+        </select>
+        <span asp-validation-for="User_Id" class="text-danger"></span>
+    </div>
+
+    <!-- Category Dropdown -->
+    <div class="form-group mb-3">
+        <label asp-for="CategoryName">Category</label>
+        <select asp-for="CategoryName" class="form-select">
+            <option value="">-- Select Category --</option>
+            <option value="Restaurant">Restaurant</option>
+            <option value="Cafe">Cafe</option>
+            <option value="Hotel">Hotel</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Tourist">Tourist</option>
+        </select>
+        <span asp-validation-for="CategoryName" class="text-danger"></span>
+    </div>
+
+    <!-- Submit Button -->
     <div class="form-group">
-        <label asp-for="Rating">Place_Rating</label>
-        <input asp-for="Rating" class ="form-control" type="number" placeholder="Enter your place Rating..." />
-        <span asp-validation-for="Rating"></span>
-    </div><br />
-    <div class="form-group">
-        <label asp-for="PriceLevel">Price_level</label>
-        <input asp-for="PriceLevel" class="form-control" type="text" placeholder="Enter your Price level..." />
-        <span asp-validation-for="PriceLevel"></span>
-    </div><br />
-    <div class="form-group">
-       <label asp-for="User_Id">User_Name</label>
-        <select class="form-select" asp-for="User_Id" asp-items="@ViewBag.App">
-           <option value="">__Select FromUser__
-           </option>
-       </select>
-       <span asp-validation-for="User_Id"></span>
-    </div><br />
-    <div class="form-group">
-        <button class="btn btn-warning" type="submit">Save</button>
+        <button type="submit" class="btn btn-warning">Save</button>
     </div>
 </form>

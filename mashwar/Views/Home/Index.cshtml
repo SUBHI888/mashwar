@@ -1,10 +1,560 @@
-﻿@{
-    ViewData["Title"] = "index";
-}
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
 
-<h1 style="text-align:center">@Localizer["Hello"]</h1>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>الصفحة الرئيسية — Yalaa Tasheh</title>
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<a asp-action="Amman" asp-controller="Place">amman</a>
-<a asp-action="Maan" asp-controller="Place">maan</a>
-<a asp-action="Aqaba" asp-controller="Place">aqaba</a>
-<a asp-action="zarqa" asp-controller="Place">zarqa</a>
+    <style>
+        :root {
+            --accent: #0F3057;
+            --bg-glass: rgba(255, 255, 255, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 2px;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: url("subhi.mp4") center/cover no-repeat fixed;
+            color: var(--accent);
+            font-family: "Tajawal", sans-serif;
+            margin: 0;
+        }
+
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: blur(1px);
+        }
+
+        .topbar {
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .topbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .lang-btn {
+            padding: 8px 18px;
+            font-size: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            color: var(--accent);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+            .lang-btn:hover {
+                background: var(--accent);
+                color: #000;
+                transform: translateY(-2px);
+            }
+
+        .highlight {
+            outline: 3px solid var(--accent);
+            border-radius: 10px;
+            transition: outline 0.3s ease;
+        }
+
+        .menu-icon {
+            font-size: 28px;
+            color: var(--accent);
+            cursor: pointer;
+            padding: 5px 10px;
+            user-select: none;
+        }
+
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            width: 270px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            box-shadow: -3px 0 15px rgba(0, 0, 0, 0.25);
+            transition: 0.35s ease;
+            padding-top: 80px;
+            z-index: 2000;
+        }
+
+        html[dir="rtl"] .side-menu {
+            right: -270px;
+        }
+
+            html[dir="rtl"] .side-menu.open {
+                right: 0;
+            }
+
+        html[dir="ltr"] .side-menu {
+            left: -270px;
+        }
+
+            html[dir="ltr"] .side-menu.open {
+                left: 0;
+            }
+
+        .side-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .side-menu ul li {
+                padding: 15px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+                .side-menu ul li a {
+                    text-decoration: none;
+                    color: #222;
+                    font-size: 18px;
+                    font-weight: 500;
+                }
+
+                .side-menu ul li:hover {
+                    background: rgba(255, 255, 255, 0.25);
+                    transition: 0.3s;
+                }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease;
+            z-index: 1500;
+        }
+
+            .overlay.show {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            padding: 5px 10px;
+            width: 400px;
+        }
+
+            .search-container input {
+                border: none;
+                outline: none;
+                padding: 8px 10px;
+                flex: 1;
+                font-size: 20px;
+                border-radius: 20px;
+                background: transparent;
+            }
+
+            .search-container button {
+                border: none;
+                background: none;
+                cursor: pointer;
+                font-size: 18px;
+            }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .primary.small,
+        .lang-btn {
+            padding: 8px 18px;
+            font-size: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            color: var(--accent);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+            .primary.small:hover,
+            .lang-btn:hover {
+                background: var(--accent);
+                color: #fff;
+                transform: translateY(-2px);
+            }
+
+        .page-content {
+            padding: 100px 60px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+            width: 100%;
+            margin: auto;
+        }
+
+        .category {
+            background: var(--bg-glass);
+            border-radius: 16px;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(12px);
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+            .category:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+            }
+
+            .category img {
+                width: 100%;
+                height: 150px;
+                object-fit: cover;
+            }
+
+            .category p {
+                font-size: 18px;
+                font-weight: 600;
+                color: #fff;
+                margin: 10px 0 15px;
+            }
+
+        .category-link {
+            text-decoration: none;
+            color: inherit;
+            display: inline-block;
+        }
+
+        /* ===== Glass Sidebar Style ===== */
+        .glass-sidebar {
+            width: 240px;
+            padding: 18px 14px 14px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, .28), rgba(255, 255, 255, .12));
+            backdrop-filter: blur(18px) saturate(140%);
+            -webkit-backdrop-filter: blur(18px) saturate(140%);
+            border-radius: 22px 0 0 22px;
+            border: 1px solid rgba(255, 255, 255, .25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+        }
+
+        /* عنوان القائمة */
+        .menu-title {
+            margin: 0 10px 14px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #111;
+        }
+
+        /* عناصر القائمة */
+        .glass-sidebar ul li {
+            margin: 6px 0;
+            padding: 0;
+            border: none;
+        }
+
+            .glass-sidebar ul li a {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 14px;
+                border-radius: 14px;
+                background: rgba(255, 255, 255, .4);
+                border: 1px solid rgba(0, 0, 0, .05);
+                font-size: 16px;
+                color: #111;
+                transition: .25s ease;
+            }
+
+                .glass-sidebar ul li a::after {
+                    content: '›';
+                    opacity: .6;
+                    font-size: 18px;
+                }
+
+                .glass-sidebar ul li a:hover {
+                    background: rgba(255, 255, 255, .75);
+                    transform: translateX(-4px);
+                }
+
+        /* الفاصل */
+        .glass-sidebar .divider {
+            height: 1px;
+            background: rgba(0, 0, 0, .15);
+            margin: 14px 6px;
+        }
+
+        /* الفوتر */
+        .glass-sidebar .footer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, .55);
+            border-radius: 14px;
+            border: 1px solid rgba(0, 0, 0, .08);
+        }
+
+        .glass-sidebar .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #111, #444);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <nav class="side-menu glass-sidebar" id="sideMenu">
+        <h1 class="menu-title">القائمة</h1>
+
+        <ul>
+            <li><a href="home.html" data-key="homepage">الصفحة الرئيسية</a></li>
+            <li><a href="aboutAs.html" data-key="aboutUs">عن الموقع</a></li>
+            <li><a href="Frequently Asked Questions Page.html" data-key="FAQ">الأسئلة الشائعة </a></li>
+            <li><a href="privacy policy page.html" data-key="PrivacyPolicy">الحماية والخصوصية </a></li>
+            <li><a href="contactAs.html" data-key="contact">تواصل معنا</a></li>
+            <li><a href="~/Login.html" data-key="loginBtn">تسجيل دخول</a></li>
+            <div class="divider"></div>
+
+            <div class="footer">
+                <div class="avatar"></div>
+                <div>
+                    <div>حساب المستخدم</div>
+                    <small>Premium</small>
+                </div>
+            </div>
+
+        </ul>
+    </nav>
+
+    <header class="topbar">
+
+        <div class="topbar-inner">
+
+            <div class="logo"> Yalaa Tasheh </div>
+
+            <div class="search-container">
+                <input type="text" placeholder="ابحث عن المدينة..." />
+                <button>🔍</button>
+            </div>
+
+            <div class="header-buttons">
+                <a href="~/Login.html">
+                    <button id="loginBtn" data-key="loginBtn" class="primary small" onclick="window.location.href='login.html'">
+                        تسجيل الدخول
+                    </button>
+                </a>
+
+                <button id="langToggle" class="lang-btn">AR/EN</button>
+                <div class="menu-icon" id="menuToggle">☰</div>
+            </div>
+
+        </div>
+    </header>
+    <video class="bg-video" autoplay muted loop>
+        <source src="koko.mp4" type="video/mp4">
+    </video>
+    <main class="page-content">
+        <section class="categories">
+            <a href="facilityAmman.html" class="category-link">
+                <div class="category">
+                    <img src="img/amman.jpeg" alt="عمان">
+                    <p data-city="amman">عمان</p>
+                </div>
+            </a>
+
+            <a href="facilityAqaba.html" class="category-link">
+                <div class="category">
+                    <img src="img/aqabb.jpg" alt="العقبة">
+                    <p data-city="aqaba">العقبة</p>
+                </div>
+            </a>
+            <a href="facilityMaan.html" class="category-link">
+                <div class="category">
+                    <img src="img/maan.webp" alt="معان">
+                    <p data-city="maan">معان</p>
+                </div>
+            </a>
+            <a href="facilityZarqa.html" class="category-link">
+
+                <div class="category">
+                    <img src="img/zarqqa.jpg" alt="الزرقاء">
+                    <p data-city="Zarqa">الزرفاء</p>
+                </div>
+            </a>
+        </section>
+    </main>
+    <script>
+        const langBtn = document.getElementById("langToggle");
+        const body = document.body;
+
+        const texts = {
+          ar: {
+            amman: "عمان",
+            aqaba: "العقبة",
+            maan: "معان",
+            Zarqa: "الزرقاء",
+            searchCity: "ابحث عن المدينة...",
+            loginBtn: "تسجيل الدخول",
+            FAQ: "لأسئلة الشائعة",
+            PrivacyPolicy: "الحماية والخصوصية",
+            homepage: "الصفحة الرئيسية",
+            aboutUs: "عن الموقع",
+            contact: "تواصل معنا",
+          },
+
+          en: {
+            amman: "Amman",
+            aqaba: "Aqaba",
+            maan: "Maan",
+            Zarqa: "Zarqa",
+            searchCity: "Search for city...",
+            loginBtn: "Login",
+            homepage: "Home",
+            aboutUs: "About Us",
+            FAQ: "FAQ",
+            PrivacyPolicy: "privacy policy ",
+            contact: "Contact",
+          }
+        };
+
+        let currentLang = "ar";
+
+        function applyLanguage(lang) {
+          document.documentElement.lang = lang;
+          document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+          const langSet = texts[lang];
+
+          document.querySelectorAll("[data-city]").forEach(el => {
+            el.textContent = langSet[el.dataset.city];
+          });
+
+
+          document.querySelectorAll(".side-menu a").forEach(a => {
+            const key = a.dataset.key;
+            if (key && langSet[key]) a.textContent = langSet[key];
+          });
+
+
+          const searchInput = document.querySelector(".search-container input");
+          if (searchInput) searchInput.placeholder = langSet.searchCity;
+
+          const loginBtn = document.getElementById("loginBtn");
+          if (loginBtn) loginBtn.textContent = langSet.loginBtn;
+        }
+
+        applyLanguage(currentLang);
+
+        langBtn.addEventListener("click", () => {
+          currentLang = currentLang === "ar" ? "en" : "ar";
+          applyLanguage(currentLang);
+        });
+
+        const loginButton = document.getElementById("loginBtn");
+        let loggedIn = false;
+
+        loginButton.addEventListener("click", () => {
+          loggedIn = !loggedIn;
+          loginButton.textContent = loggedIn
+            ? (currentLang === "ar" ? "تسجيل الخروج" : "Logout")
+            : texts[currentLang].loginBtn;
+        });
+
+        const menuBtn = document.getElementById("menuToggle");
+        const sideMenu = document.getElementById("sideMenu");
+        const overlay = document.getElementById("overlay");
+
+        function openMenu() {
+          sideMenu.classList.add("open");
+          overlay.classList.add("show");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeMenu() {
+          sideMenu.classList.remove("open");
+          overlay.classList.remove("show");
+          document.body.style.overflow = "";
+        }
+
+        menuBtn.addEventListener("click", () => {
+          sideMenu.classList.contains("open") ? closeMenu() : openMenu();
+        });
+
+        overlay.addEventListener("click", closeMenu);
+
+        document.addEventListener("keydown", e => {
+          if (e.key === "Escape") closeMenu();
+        });
+
+
+        const searchInput2 = document.querySelector(".search-container input");
+
+        if (searchInput2) {
+          searchInput2.addEventListener("input", () => {
+            const value = searchInput2.value.trim().toLowerCase();
+            if (!value) return;
+
+            document.querySelectorAll(".category").forEach(cat => {
+              const name = cat.querySelector("p").textContent.trim().toLowerCase();
+
+              if (name.startsWith(value)) {
+                cat.scrollIntoView({ behavior: "smooth", block: "center" });
+                cat.classList.add("highlight");
+
+                setTimeout(() => cat.classList.remove("highlight"), 1200);
+              }
+            });
+          });
+        }
+    </script>
+
+</body>
+
+</html>

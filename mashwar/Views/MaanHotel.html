@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفنادق-معان</title>
+    <style>
+        :root {
+            --accent: #0F3057;
+            --bg-glass: rgba(255, 255, 255, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 2px;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0F3057;
+            transition: 0.3s;
+        }
+
+        body {
+            background: center/cover no-repeat fixed;
+            color: var(--accent);
+            font-family: "Tajawal", sans-serif;
+            margin: 0;
+
+        }
+
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: blur(1px);
+        }
+
+        .topbar {
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .topbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .lang-btn {
+            padding: 8px 18px;
+            font-size: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            color: var(--accent);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: var(--accent);
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .highlight {
+            outline: 3px solid var(--accent);
+            border-radius: 10px;
+            transition: outline 0.3s ease;
+        }
+
+        .menu-icon {
+            font-size: 28px;
+            color: var(--accent);
+            cursor: pointer;
+            padding: 5px 10px;
+            user-select: none;
+        }
+
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            width: 270px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            box-shadow: -3px 0 15px rgba(0, 0, 0, 0.25);
+            transition: 0.35s ease;
+            padding-top: 80px;
+            z-index: 2000;
+        }
+
+        html[dir="rtl"] .side-menu {
+            right: -270px;
+        }
+
+        html[dir="rtl"] .side-menu.open {
+            right: 0;
+        }
+
+        html[dir="ltr"] .side-menu {
+            left: -270px;
+        }
+
+        html[dir="ltr"] .side-menu.open {
+            left: 0;
+        }
+
+        .side-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .side-menu ul li {
+            padding: 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .side-menu ul li a {
+            text-decoration: none;
+            color: #222;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .side-menu ul li:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transition: 0.3s;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease;
+            z-index: 1500;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            padding: 5px 10px;
+            width: 400px;
+        }
+
+        .search-container input {
+            border: none;
+            outline: none;
+            padding: 8px 10px;
+            flex: 1;
+            font-size: 20px;
+            border-radius: 20px;
+            background: transparent;
+        }
+
+        .search-container button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .primary.small,
+        .lang-btn {
+            padding: 8px 18px;
+            font-size: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            color: var(--accent);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .primary.small:hover,
+        .lang-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .page-content {
+            padding: 100px 60px;
+            display: flex;
+            justify-content: center;
+        }
+
+
+        .container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            transition: 0.35s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card a {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card-title {
+            background: rgb(255, 255, 255);
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .4);
+        }
+
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            /* ثابت لكل الصور */
+            object-fit: cover;
+            /* يملأ الكادر بدون تشويه */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card-title {
+            background-color: var(--bg-glass);
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+
+        .menu-title {
+            margin: 0 10px 14px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #111;
+        }
+
+        .glass-sidebar {
+            width: 240px;
+            padding: 18px 14px 14px;
+            background: linear-gradient(180deg,
+                    rgba(255, 255, 255, .28),
+                    rgba(255, 255, 255, .12));
+            backdrop-filter: blur(18px) saturate(140%);
+            -webkit-backdrop-filter: blur(18px) saturate(140%);
+            border-radius: 22px 0 0 22px;
+            border: 1px solid rgba(255, 255, 255, .25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+        }
+
+        .menu-title {
+            margin: 0 10px 14px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #111;
+        }
+
+        .glass-sidebar ul li {
+            margin: 6px 0;
+            padding: 0;
+            border: none;
+        }
+
+        .glass-sidebar ul li a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .4);
+            border: 1px solid rgba(0, 0, 0, .05);
+            font-size: 16px;
+            color: #111;
+            transition: .25s ease;
+        }
+
+        .glass-sidebar ul li a::after {
+            content: '›';
+            opacity: .6;
+            font-size: 18px;
+        }
+
+        .glass-sidebar ul li a:hover {
+            background: rgba(255, 255, 255, .75);
+            transform: translateX(-4px);
+        }
+
+
+        .glass-sidebar .divider {
+            height: 1px;
+            background: rgba(0, 0, 0, .15);
+            margin: 14px 6px;
+        }
+
+        /* الفوتر */
+        .glass-sidebar .footer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, .55);
+            border-radius: 14px;
+            border: 1px solid rgba(0, 0, 0, .08);
+        }
+
+        .glass-sidebar .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #111, #444);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <nav class="side-menu glass-sidebar" id="sideMenu">
+        <h1 class="menu-title">القائمة</h1>
+
+        <ul>
+            <li><a href="home.html" data-key="homepage">الصفحة الرئيسية</a></li>
+            <li><a href="aboutAs.html" data-key="aboutUs">عن الموقع</a></li>
+            <li><a href="Frequently Asked Questions Page.html" data-key="FAQ">الأسئلة الشائعة </a></li>
+            <li><a href="privacy policy page.html" data-key="PrivacyPolicy">الحماية والخصوصية </a></li>
+            <li><a href="contactAs.html" data-key="contact">تواصل معنا</a></li>
+            <li><a href="login.html" data-key="loginBtn">تسجيل دخول</a></li>
+            <div class="divider"></div>
+            <div class="footer">
+                <div class="avatar"></div>
+                <div>
+                    <div>حساب المستخدم</div>
+                    <small>Premium</small>
+                </div>
+            </div>
+
+        </ul>
+    </nav>
+    <header class="topbar">
+
+        <div class="topbar-inner">
+
+            <div class="logo"> Yalaa Tasheh </div>
+
+            <div class="search-container">
+                <input type="text" placeholder="ابحث عن المدينة..." />
+                <button>🔍</button>
+            </div>
+
+            <div class="header-buttons">
+                <button data-key="loginBtn" class="primary small" onclick="window.location.href='login.html'">تسجيل
+                    الدخول
+
+                </button>
+
+                <button id="langToggle" class="lang-btn">AR/EN</button>
+                <div class="menu-icon" id="menuToggle">☰</div>
+            </div>
+
+        </div>
+    </header>
+    <div class="container">
+        <div class="gallery">
+            <video class="bg-video" autoplay muted loop>
+                <source src="koko.mp4" type="video/mp4">
+            </video>
+            <!-- السطر الأول -->
+            <a href="alomaraa-hotel.html"> 
+            <div class="card">
+                <img src="picture/alomaraa plaza.jpeg" alt="فندق" class="card-image">
+                <div class="card-title"> فندق بلازا </div>
+            </div>
+            </a>
+            <a href="awtar-thahab-hotel.html">
+            <div class="card">
+                <img src="picture/awtar thahab.jpeg" alt="فندق" class="card-image">
+                <div class="card-title"> فندق اوتار ذهب</div>
+            </div>
+            </a>
+            <a href="movenpick-petra.html">
+            <div class="card">
+                <img src="picture/movenpick petra.jpeg" alt="فندق" class="card-image">
+                <div class="card-title">فندق الموفيمبيك </div>
+            </div>
+            </a>
+            <a href="areast-hotel.html">
+            <div class="card">
+                <img src="picture/Areates hotel.jpeg" alt="فندق" class="card-image">
+                <div class="card-title">فندق اريست </div>
+            </div>
+            </a>
+
+            <!-- السطر الثاني -->
+            <a href="petra-moon-hotel.html">
+            <div class="card">
+                <img src="picture/Petra moon.jpeg" alt="فندق" class="card-image">
+                <div class="card-title"> فندق بترا موون</div>
+            </div>
+            </a>
+            <a href="petra-moon-luxury-hotel.html">
+            <div class="card">
+                <img src="picture/Petra moon luxury .jpeg" alt="فندق" class="card-image">
+                <div class="card-title"> فندق قمر البتراء </div>
+            </div>
+            </a>
+            <a href="uncil-ali-hotel.html">
+            <div class="card">
+                <img src="picture/uncil ali.jpeg" alt="hotel" class="card-image">
+                <div class="card-title"> فندق العم علي </div>
+            </div>
+            </a>
+            <a href="marvel-hotel.html">
+            <div class="card">
+                <img src="picture/Marvel.jpeg" alt="hotel" class="card-image">
+                <div class="card-title"> فندق مارفل</div>
+            </div>
+            </a>
+
+            <!-- السطر الثالث -->
+             <a href="moon-house-hotel.html">
+            <div class="card">
+                <img src="picture/Moon house.jpeg" alt="hotel" class="card-image">
+                <div class="card-title">فندق قمر البيت </div>
+            </div>
+            </a>
+            <a href="sun-set-hotel.html">
+            <div class="card">
+                <img src="picture/Sun set Hotel.jpeg" alt="hotel" class="card-image">
+                <div class="card-title"> فندق شروق الشمس</div>
+            </div>
+            </a>
+            <a href="shaqilath-hotel.html">
+            <div class="card">
+                <img src="picture/Shaqilath hotel.jpeg" alt="hotel" class="card-image">
+                <div class="card-title"> فندق شاقيلاث</div>
+            </div>
+            </a>
+            <a href="petra-heart-hotel.html">
+            <div class="card">
+                <img src="picture/Petra heart hotel.jpeg" alt="hotel" class="card-image">
+                <div class="card-title">فندق قلب البتراء </div>
+            </div>
+            </a>
+
+            <!-- السطر الرابع -->
+            <a href="sella-hotel.html">
+            <div class="card">
+                <img src="picture/Sella Hotel.jpeg" alt="hotel" class="card-image">
+                <div class="card-title">فندق سيلا </div>
+            </div>
+            </a>
+            <a href="h-luxury-hotel.html">
+            <div class="card">
+                <img src="picture/Hluxury Hotel.jpeg" alt="hotel" class="card-image">
+                <div class="card-title">H Luxuryفندق </div>
+            </div>
+            </a>
+            <a href="family-hotel.html">
+            <div class="card">
+                <img src="picture/Family hotel.jpeg" alt="hotel" class="card-image">
+                <div class="card-title">فندق العائلة </div>
+            </div>
+            </a>
+
+            <!-- السطر الخامس -->
+
+
+        </div>
+    </div>
+    <script>
+        window.pageTranslations = {
+            ar: {
+                homepage: "الصفحة الرئيسية",
+                aboutUs: "عن الموقع",
+                contact: "تواصل معنا",
+                FAQ: "لأسئلة الشائعة",
+                PrivacyPolicy: "الحماية والخصوصية",
+                loginBtn: "تسجيل الدخول",
+                search: "ابحث عن الفندق...",
+
+                c1: "فندق بلازا",
+                c2: "فندق اوتار ذهب",
+                c3: "فندق الموفيمبيك",
+                c4: "فندق الماريوت",
+                c5: "فندق بترا موون",
+                c6: "فندق قمر البتراء",
+                c7: "فندق العم علي",
+                c8: "فندق مارفل",
+                c9: "فندق قمر البيت",
+                c10: "فندق شروق الشمس",
+                c11: "فندق شاقيلاث",
+                c12: "فندق قلب البتراء",
+                c13: "فندق سيلا",
+                c14: "H Luxury فندق",
+                c15: "فندق العائلة",
+                c16: "فندق ارسيت",
+
+            },
+            en: {
+                homepage: "Home",
+                FAQ: "FAQ",
+                PrivacyPolicy: "privacy policy ",
+                aboutUs: "About Us",
+                contact: "Contact Us",
+                loginBtn: "Login",
+                search: "Search for a hotel...",
+                c1: "Alomaraa Plaza Hotel",
+                c2: "Awtar Thahab Hotel",
+                c3: "Movenpick Petra",
+                c4: "Areast Hotel",
+                c5: "Petra Moon Hotel",
+                c6: "Petra Moon Luxury Hotel",
+                c7: "Uncil Ali Hotel",
+                c8: "Marvel Hotel",
+                c9: "Moon House Hotel",
+                c10: "Sun Set Hotel",
+                c11: "Shaqilath Hotel",
+                c12: "Petra Heart Hotel",
+                c13: "Sella Hotel",
+                c14: "H Luxury Hotel",
+                c15: "Family Hotel",
+                c16: "Areast Hotel",
+
+            }
+        };
+        document.addEventListener("DOMContentLoaded", () => {
+            document.documentElement.setAttribute("lang", "ar");
+            document.documentElement.setAttribute("dir", "rtl");
+        });
+
+        let currentLang = "ar";
+        function applyLang(lang, translations) {
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+            document.querySelectorAll("[data-key]").forEach(el => {
+                const key = el.dataset.key;
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            const searchInput = document.querySelector(".search-container input");
+            if (searchInput && translations[lang].search) {
+                searchInput.placeholder = translations[lang].search;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const langBtn = document.getElementById("langToggle");
+
+            if (langBtn && window.pageTranslations) {
+                applyLang("ar", window.pageTranslations);
+
+                langBtn.addEventListener("click", () => {
+                    currentLang = currentLang === "ar" ? "en" : "ar";
+                    applyLang(currentLang, window.pageTranslations);
+                });
+            }
+
+            document.querySelectorAll(".card-title").forEach((el, i) => {
+                el.setAttribute("data-key", "c" + (i + 1));
+            });
+
+            const menuBtn = document.getElementById("menuToggle");
+            const sideMenu = document.getElementById("sideMenu");
+            const overlay = document.getElementById("overlay");
+
+            if (menuBtn && sideMenu && overlay) {
+                function openMenu() {
+                    sideMenu.classList.add("open");
+                    overlay.classList.add("show");
+                    document.body.style.overflow = "hidden";
+                }
+
+                function closeMenu() {
+                    sideMenu.classList.remove("open");
+                    overlay.classList.remove("show");
+                    document.body.style.overflow = "";
+                }
+
+                menuBtn.addEventListener("click", () => {
+                    sideMenu.classList.contains("open") ? closeMenu() : openMenu();
+                });
+
+                overlay.addEventListener("click", closeMenu);
+
+                document.addEventListener("keydown", e => {
+                    if (e.key === "Escape") closeMenu();
+                });
+            }
+        });
+
+    </script>
+   
+
+
+</body>
+
+</html>

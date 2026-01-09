@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1 Cafees</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #37343f;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            color: #fff;
+        }
+
+        header {
+            background-color: #000;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .restaurant-name {
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #f39c12;
+        }
+
+        .restaurant-location {
+            font-size: 18px;
+            color: #ecf0f1;
+        }
+
+        .lang-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #f39c12;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: white;
+            color: #000;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #f39c12;
+            padding-bottom: 10px;
+        }
+
+        .info-card p,
+        .info-card ul {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .info-card ul {
+            list-style-position: inside;
+        }
+
+        .info-card li {
+            margin: 8px 0;
+            padding-right: 10px;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .contact-icon {
+            font-size: 20px;
+            color: #f39c12;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .features {
+            background: linear-gradient(135deg, #b7b682 0%, #212023 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .features h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .menu-highlights {
+            background: white;
+            color: #000;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .menu-highlights h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid #f39c12;
+            padding-bottom: 15px;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .menu-item {
+            padding: 20px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            border-color: #f39c12;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.2);
+        }
+
+        .menu-item h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .menu-item p {
+            font-size: 14px;
+        }
+
+        .reserve-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .reserve-btn {
+            background: linear-gradient(135deg, #b7b682 0%, #1f1e1e 100%);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(144, 136, 105, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .reserve-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(209, 208, 207, 0.6);
+        }
+
+        @media(max-width:768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+
+            .restaurant-name {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="lang-btn" onclick="toggleLanguage()">English / عربي</button>
+
+    <header>
+        <div class="header-content">
+            <h1 class="restaurant-name" data-ar="Chapter One Cafe – شابتر ون" data-en="Chapter One Cafe">Chapter one
+                caffee</h1>
+            <p class="restaurant-location" data-ar="📍 معان - الإشارة الضوئية - الأردن"
+                data-en="📍 Ma'an - Traffic Light - Jordan">📍 معان - الإشارة الضوئية - الأردن</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="main-image">
+            <img src="Cafees Maan/chapter 1.jpeg" alt="Chapter one">
+        </div>
+
+        <div class="info-grid">
+
+            <div class="info-card">
+                <h2 data-ar="📖 نبذة عن الكافية" data-en="📖 About the Cafe">📖 نبذة عن الكافية</h2>
+                <p data-ar="كافيه يقدم مشروبات قهوة ومشروبات أخرى (ساخنة وباردة) ويعتبر مكان مناسب للجلوس، الدردشة، أو حتى لقاءات خفيفة مع الأصدقاء"
+                    data-en="Cafe serving coffee and other drinks (hot & cold), perfect for sitting, chatting, or casual meetups with friends.">
+                    كافيه يقدم مشروبات قهوة ومشروبات أخرى (ساخنة وباردة) ويعتبر مكان مناسب للجلوس، الدردشة، أو حتى
+                    لقاءات خفيفة مع الأصدقاء</p>
+                <p data-ar="يقدم خدمة التوصيل أيضًا إذا حاب تطلب مشروبك للمكان اللي أنت فيه."
+                    data-en="Delivery service available if you want your drink delivered to your location.">بيقدم خدمة
+                    التوصيل أيضًا إذا حاب تطلب مشروبك للمكان اللي أنت فيه.</p>
+            </div>
+
+            <div class="info-card">
+                <h2 data-ar="📞 معلومات التواصل" data-en="📞 Contact Information">📞 معلومات التواصل</h2>
+                <div class="contact-info">
+                    <span class="contact-icon">📱</span>
+                    <p data-ar="<strong>الموبايل:</strong>0775152241" data-en="<strong>Mobile:</strong>0775152241">
+                        <strong>الموبايل:</strong>0775152241
+                    </p>
+                </div>
+                <div class="contact-info">
+                    <span class="contact-icon">📧</span>
+                    <p data-ar="<strong>انستقرام:</strong> chapter1_cafe"
+                        data-en="<strong>Instagram:</strong> chapter1_cafe"><strong>انستقرام:</strong> 📷<a
+                            href="https://www.instagram.com/chapter1_cafe/?hl=ar" target="_blank">chapter1_cafe</a></p>
+                </div>
+                <div class="contact-info">
+                    <span class="contact-icon">📍</span>
+                    <p data-ar="<strong>العنوان:</strong> الإشارة الضوئية. معان"
+                        data-en="<strong>Address:</strong> Traffic Light, Ma'an"><strong>العنوان:</strong> الإشارة
+                        الضوئية. معان</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h2 data-ar="🕐 ساعات العمل" data-en="🕐 Working Hours">🕐 ساعات العمل</h2>
+                <div class="hours-row">
+                    <span data-ar="السبت - الخميس" data-en="Saturday - Thursday"><strong>السبت - الخميس</strong></span>
+                    <span data-ar="10:00 صباحاً - 11:00 قبل منتصف الليل" data-en="10:00 AM - 11:00 PM">10:00 صباحاً -
+                        11:00 قبل منتصف الليل</span>
+                </div>
+                <div class="hours-row">
+                    <span data-ar="الجمعة" data-en="Friday"><strong>الجمعة</strong></span>
+                    <span data-ar="10:00 ظهراً - 12:00 منتصف الليل" data-en="10:00 AM - 12:00 AM">10:00 ظهراً - 12:00
+                        منتصف الليل</span>
+                </div>
+                <div class="hours-row">
+                    <span data-ar="العطل الرسمية" data-en="Public Holidays"><strong>العطل الرسمية</strong></span>
+                    <span data-ar="حسب الإعلان" data-en="As announced">حسب الإعلان</span>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h2 data-ar="⭐ التخصصات" data-en="⭐ Specialties">⭐ التخصصات</h2>
+                <ul>
+                    <li data-ar="☕ مشروبات القهوة المتنوعة: مثل الإسبريسو، الكابتشينو، اللاتيه والمشروبات الباردة."
+                        data-en="☕ Various coffee drinks: espresso, cappuccino, latte, iced drinks.">☕ مشروبات القهوة
+                        المتنوعة: مثل الإسبريسو، الكابتشينو، اللاتيه والمشروبات الباردة.</li>
+                    <li data-ar="🍹 مشروبات باردة وساخنة أخرى تناسب الطقس والمزاج"
+                        data-en="🍹 Other hot & cold drinks to match weather and mood.">🍹 مشروبات باردة وساخنة أخرى
+                        تناسب الطقس والمزاج</li>
+                    <li data-ar="🍰 غالبًا ما يكون هناك وجبات خفيفة وحلويات لتكمل القهوة (يعتمد على توفرها يوميًا)"
+                        data-en="🍰 Often light snacks and desserts are available to complement coffee (daily availability may vary).">
+                        🍰 غالبًا ما يكون هناك وجبات خفيفة وحلويات لتكمل القهوة (يعتمد على توفرها يوميًا)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2 data-ar="✨ مميزات الكافيه ✨" data-en="✨ Cafe Features ✨">✨ مميزات الكافيه ✨</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                    <h3 data-ar="قاعات عائلية" data-en="Family rooms">قاعات عائلية</h3>
+                    <p data-ar="قاعات خاصة ومريحة للعائلات" data-en="Private and comfortable family rooms">قاعات خاصة
+                        ومريحة للعائلات</p>
+                    <p data-ar="كادر مميز" data-en="Professional staff">كادر مميز</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🅿️</div>
+                    <h3 data-ar="موقف سيارات" data-en="Parking">موقف سيارات</h3>
+                    <p data-ar="موقف واسع ومجاني" data-en="Spacious and free">موقف واسع ومجاني</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📶</div>
+                    <h3 data-ar="واي فاي مجاني" data-en="Free Wi-Fi">واي فاي مجاني</h3>
+                    <p data-ar="إنترنت عالي السرعة" data-en="High-speed internet">إنترنت عالي السرعة</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🚗</div>
+                    <h3 data-ar="خدمة التوصيل" data-en="Delivery Service">خدمة التوصيل</h3>
+                    <p data-ar="توصيل سريع لجميع المناطق" data-en="Fast delivery to all areas">توصيل سريع لجميع المناطق
+                    </p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">❄️</div>
+                    <h3 data-ar="مكيف مركزي" data-en="Air Conditioning">مكيف مركزي</h3>
+                    <p data-ar="أجواء مريحة طوال العام" data-en="Comfortable environment all year round">أجواء مريحة
+                        طوال العام</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💳</div>
+                    <h3 data-ar="طرق الدفع" data-en="Payment Methods">طرق الدفع</h3>
+                    <p data-ar="نقدي وبطاقات ائتمانية" data-en="Cash & credit cards">نقدي وبطاقات ائتمانية</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-highlights">
+            <h2 data-ar="🍴 أشهرالمشروبات والحلويات الخفيفة" data-en="🍴 Popular Drinks & Light Desserts">🍴
+                أشهرالمشروبات والحلويات الخفيفة</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <h3 data-ar="Iced V60" data-en="Iced V60">Iced V60</h3>
+                    <p data-ar="قهوة باردة بطريقة V60" data-en="Cold coffee made with V60 method">قهوة باردة بطريقة V60
+                    </p>
+                </div>
+                <div class="menu-item">
+                    <h3 data-ar="Iced Spanish Latte" data-en="Iced Spanish Latte">Iced Spanish Latte</h3>
+                    <p data-ar="سبانيش لاتيه مثلّج" data-en="Iced Spanish Latte drink">سبانيش لاتيه مثلّج</p>
+                </div>
+                <div class="menu-item">
+                    <h3 data-ar="Iced Latte" data-en="Iced Latte">Iced Latte</h3>
+                    <p data-ar="لاتيه مثلّج" data-en="Iced Latte drink">لاتيه مثلّج</p>
+                </div>
+                <div class="menu-item">
+                    <h3 data-ar="عصائر ومشروبات باردة" data-en="Juices & Cold Drinks">عصائر ومشروبات باردة</h3>
+                    <p data-ar="مشروبات خاصة في شابتر" data-en="Special drinks at Chapter 1">مشروبات خاصة في شابتر</p>
+                </div>
+                <div class="menu-item">
+                    <h3 data-ar="حلويات أو سناكات خفيفة" data-en="Desserts or Light Snacks">حلويات أو سناكات خفيفة</h3>
+                    <p data-ar="حسب توفرها" data-en="Depending on availability">حسب توفرها</p>
+                </div>
+                <div class="menu-item">
+                    <h3 data-ar="Turcish Coffee" data-en="Turkish Coffee">Turcish Coffee</h3>
+                    <p data-ar="قهوة تركية" data-en="Turkish Coffee">قهوة تركية</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="reserve-section">
+            <a href="eserve.html">
+                <button class="reserve-btn" data-ar="احجز طاولتك الآن 🎯" data-en="Reserve Your Table Now 🎯">احجز
+                    طاولتك الآن 🎯</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let lang = 'ar';
+        function toggleLanguage() {
+            lang = lang === 'ar' ? 'en' : 'ar';
+            document.querySelectorAll('[data-ar]').forEach(el => {
+                el.innerHTML = lang === 'ar' ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+            });
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        }
+
+        // Scroll animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.info-card, .feature-item, .menu-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+
+</html>

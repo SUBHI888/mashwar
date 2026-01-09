@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أماكن سياحية -عمان </title>
+    <style>
+        :root {
+            --accent: #0F3057;
+            --bg-glass: rgba(255, 255, 255, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 2px;
+            box-sizing: border-box;
+        }
+
+        body {
+            color: var(--accent);
+            font-family: "Tajawal", sans-serif;
+            margin: 0;
+
+        }
+
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: blur(1px);
+
+        }
+
+        .topbar {
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .topbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .lang-btn {
+            padding: 8px 18px;
+            font-size: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            color: var(--accent);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: var(--accent);
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .highlight {
+            outline: 3px solid var(--accent);
+            border-radius: 10px;
+            transition: outline 0.3s ease;
+        }
+
+        .menu-icon {
+            font-size: 28px;
+            color: var(--accent);
+            cursor: pointer;
+            padding: 5px 10px;
+            user-select: none;
+        }
+
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            width: 270px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            box-shadow: -3px 0 15px rgba(0, 0, 0, 0.25);
+            transition: 0.35s ease;
+            padding-top: 80px;
+            z-index: 2000;
+        }
+
+        html[dir="rtl"] .side-menu {
+            right: -270px;
+        }
+
+        html[dir="rtl"] .side-menu.open {
+            right: 0;
+        }
+
+        html[dir="ltr"] .side-menu {
+            left: -270px;
+        }
+
+        html[dir="ltr"] .side-menu.open {
+            left: 0;
+        }
+
+        .side-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .side-menu ul li {
+            padding: 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .side-menu ul li a {
+            text-decoration: none;
+            color: #222;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .side-menu ul li:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transition: 0.3s;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease;
+            z-index: 1500;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            padding: 5px 10px;
+            width: 400px;
+        }
+
+        .search-container input {
+            border: none;
+            outline: none;
+            padding: 8px 10px;
+            flex: 1;
+            font-size: 20px;
+            border-radius: 20px;
+            background: transparent;
+        }
+
+        .search-container button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .primary.small,
+        .lang-btn {
+            padding: 8px 18px;
+            font-size: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            color: var(--accent);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .primary.small:hover,
+        .lang-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .page-content {
+            padding: 100px 60px;
+            display: flex;
+            justify-content: center;
+        }
+
+
+
+        .container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, .3);
+            transition: .35s ease;
+        }
+
+        .card-title {
+            background: rgb(255, 255, 255);
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .4);
+        }
+
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: flex;
+        }
+
+        .card-title {
+            background-color: var(--bg-glass);
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .menu-title {
+            margin: 0 10px 14px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #111;
+        }
+
+        .glass-sidebar {
+            width: 240px;
+            padding: 18px 14px 14px;
+            background: linear-gradient(180deg,
+                    rgba(255, 255, 255, .28),
+                    rgba(255, 255, 255, .12));
+            backdrop-filter: blur(18px) saturate(140%);
+            -webkit-backdrop-filter: blur(18px) saturate(140%);
+            border-radius: 22px 0 0 22px;
+            border: 1px solid rgba(255, 255, 255, .25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+        }
+
+        .menu-title {
+            margin: 0 10px 14px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #111;
+        }
+
+
+        .glass-sidebar ul li {
+            margin: 6px 0;
+            padding: 0;
+            border: none;
+        }
+
+        .glass-sidebar ul li a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .4);
+            border: 1px solid rgba(0, 0, 0, .05);
+            font-size: 16px;
+            color: #111;
+            transition: .25s ease;
+        }
+
+        .glass-sidebar ul li a::after {
+            content: '›';
+            opacity: .6;
+            font-size: 18px;
+        }
+
+        .glass-sidebar ul li a:hover {
+            background: rgba(255, 255, 255, .75);
+            transform: translateX(-4px);
+        }
+
+
+        .glass-sidebar .divider {
+            height: 1px;
+            background: rgba(0, 0, 0, .15);
+            margin: 14px 6px;
+        }
+
+        .glass-sidebar .footer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, .55);
+            border-radius: 14px;
+            border: 1px solid rgba(0, 0, 0, .08);
+        }
+
+        .glass-sidebar .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #111, #444);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay" id="overlay"></div>
+
+    <nav class="side-menu glass-sidebar" id="sideMenu">
+        <h1 class="menu-title">القائمة</h1>
+
+        <ul>
+            <li><a href="home.html" data-key="homepage">الصفحة الرئيسية</a></li>
+            <li><a href="aboutAs.html" data-key="aboutUs">عن الموقع</a></li>
+            <li><a href="Frequently Asked Questions Page.html" data-key="FAQ">الأسئلة الشائعة </a></li>
+            <li><a href="privacy policy page.html" data-key="PrivacyPolicy">الحماية والخصوصية </a></li>
+            <li><a href="contactAs.html" data-key="contact">تواصل معنا</a></li>
+            <li><a href="login.html" data-key="loginBtn">تسجيل دخول</a></li>
+            <div class="divider"></div>
+            <div class="footer">
+                <div class="avatar"></div>
+                <div>
+                    <div>حساب المستخدم</div>
+                    <small>Premium</small>
+                </div>
+            </div>
+
+        </ul>
+    </nav>
+    <header class="topbar">
+
+        <div class="topbar-inner">
+
+            <div class="logo"> Yalaa Tasheh </div>
+
+            <div class="search-container">
+                <input type="text" placeholder="ابحث عن المدينة..." />
+                <button>🔍</button>
+            </div>
+
+            <div class="header-buttons">
+                <a href="login.html">
+                    <button id="loginBtn" data-key="loginBtn" class="primary small"
+                        onclick="window.location.href='login.html'">
+                        تسجيل الدخول
+                    </button></a>
+
+                <button id="langToggle" class="lang-btn">AR/EN</button>
+                <div class="menu-icon" id="menuToggle">☰</div>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="gallery">
+            <video class="bg-video" autoplay muted loop>
+                <source src="koko.mp4" type="video/mp4">
+            </video>
+            <!-- السطر الأول -->
+            <div class="card">
+                <img src="Tourist Amman/Citadel of Amman.jpeg" alt="entertamenent" class="card-image">
+                <div class="card-title">قلعةعمان</div>
+            </div>
+            <div class="card">
+                <img src="Tourist Amman/Roman Theatre.jpeg" alt="entertamenent" class="card-image">
+                <div class="card-title">المدرج الروماني</div>
+            </div>
+            <div class="card">
+                <img src="Tourist Amman/Rainbow Street.jpeg" alt="entertamenent" class="card-image">
+                <div class="card-title">شارع الرينبو</div>
+            </div>
+            <div class="card">
+                <img src="Tourist Amman/Abdali Boulevard.jpeg" alt="entertamenent" class="card-image">
+                <div class="card-title"> بوليفارد العبدلي</div>
+            </div>
+
+            <!-- السطر الثاني -->
+            <div class="card">
+                <img src="Tourist Amman/Royal Automobile Museum.jpeg" alt="entertamenent" class="card-image">
+                <div class="card-title"> متحف السيارات الملكي</div>
+            </div>
+            <div class="card">
+                <img src="Tourist Amman/Jordan Museum.jpeg" alt="entertamenent" class="card-image">
+                <div class="card-title"> متحف الاردن </div>
+            </div>
+            <div class="card">
+                <img src="Tourist Amman/King Abdullah I Mosque.jpeg" alt="entertamenent" class="card-image">
+                <div class="card-title">مسجد الملك عبدالله الأول </div>
+            </div>
+            <div class="card">
+                <img src="Tourist Amman/Darat al Funun.jpeg" alt="entertamenent" class="card-image">
+                <div class="card-title"> دائرة الفنون</div>
+            </div>
+
+            <!-- السطر الثالث -->
+            <div class="card">
+                <img src="Tourist Amman/Al Balad Downtown.jpeg" alt="entertamenent" class="card-image">
+                <div class="card-title"> وسط البلد</div>
+            </div>
+            <div class="card">
+                <img src="Tourist Amman/Jabal Al Lweibdeh.jpeg" alt="entertamenent" class="card-image">
+                <div class="card-title">جبل اللويبدة</div>
+            </div>
+            <div class="card">
+                <img src="Tourist Amman/National Gallery of Fine Arts.jpeg" alt="مطعم" class="card-image">
+                <div class="card-title">المعرض الوطني للفنون الجميلة</div>
+            </div>
+            <div class="card">
+                <img src="Tourist Amman/Children’s Museum Jordan.jpeg" alt="مطعم" class="card-image">
+                <div class="card-title"> متحف الأطفال</div>
+            </div>
+
+            <!-- السطر الرابع -->
+            <div class="card">
+                <img src="Tourist Amman/King Hussein Public Parks.jpeg" alt="entertamenent" class="card-image">
+                <div class="card-title">حدائق الحسين العامة</div>
+            </div>
+            <div class="card">
+                <img src="Tourist Amman/Iraq Al Amir.jpeg" alt="entertamenent" class="card-image">
+                <div class="card-title">عراق الأمير </div>
+            </div>
+            <div class="card">
+                <img src="Tourist Amman/Jabal Al Qala’a Viewpoint.jpeg" alt="entertamenent" class="card-image">
+                <div class="card-title"> جبل القلعة</div>
+            </div>
+            <div class="card">
+                <img src="Tourist Amman/Jordan Museum.jpeg" alt="entertamenent" class="card-image">
+                <div class="card-title">متحف الأردن</div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+
+        const texts = {
+            ar: {
+                homepage: "الصفحة الرئيسية",
+                aboutUs: "عن الموقع",
+                contact: "تواصل معنا",
+                FAQ: "لأسئلة الشائعة",
+                PrivacyPolicy: "الحماية والخصوصية",
+                login: "تسجيل الدخول",
+                search: "ابحث عن أماكن ترفيهية...",
+
+                "Citadel of Amman": "قلعة عمّان",
+                "Roman Theatre": "المدرج الروماني",
+                "Rainbow Street": "شارع الرينبو",
+                "Abdali Boulevard": "بوليفارد العبدلي",
+                "Royal Automobile Museum": "متحف السيارات الملكي",
+                "Jordan Museum": "متحف الأردن",
+                "King Abdullah I Mosque": "مسجد الملك عبد الله الأول",
+                "Darat al Funun": "دارة الفنون",
+                "Al Balad Downtown": "وسط البلد ",
+                "Jabal Al Lweibdeh": "جبل اللويبدة",
+                "National Gallery of Fine Arts": "المعرض الوطني للفنون الجميلة",
+                "Children’s Museum Jordan": "متحف الأطفال ",
+                "King Hussein Public Parks": "حدائق الحسين العامة",
+                "Iraq Al Amir": "عراق الأمير",
+                "Jabal Al Qala’a Viewpoint": " جبل القلعة",
+                "Jordan muesiem": "متحف الأردن"
+            },
+
+            en: {
+                homepage: "Home",
+                aboutUs: "About Us",
+                contact: "Contact",
+                FAQ: "FAQ",
+                PrivacyPolicy: "privacy policy ",
+                login: "Login",
+                search: "Search for tourist...",
+
+                "Citadel of Amman": "Citadel of Amman",
+                "Roman Theatre": "Roman Theatre",
+                "Rainbow Street": "Rainbow Street",
+                "Abdali Boulevard": "Abdali Boulevard",
+                "Royal Automobile Museum": "Royal Automobile Museum",
+                "Jordan Museum": "Jordan Museum",
+                "King Abdullah I Mosque": "King Abdullah I Mosque",
+                "Darat al Funun": "Darat al Funun",
+                "Al Balad Downtown": "Al Balad Downtown",
+                "Jabal Al Lweibdeh": "Jabal Al Lweibdeh",
+                "National Gallery of Fine Arts": "National Gallery of Fine Arts",
+                "Children’s Museum Jordan": "Children’s Museum Jordan",
+                "King Hussein Public Parks": "King Hussein Public Parks",
+                "Iraq Al Amir": "Iraq Al Amir",
+                "Jabal Al Qala’a Viewpoint": "Jabal Al Qala’a Viewpoint",
+                "Jordan muesiem": "Jordan Museum"
+            }
+        };
+
+
+        let currentLang = localStorage.getItem("lang") || "ar";
+
+        function applyLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+            localStorage.setItem("lang", lang);
+
+            const t = texts[lang];
+
+
+            document.querySelectorAll(".side-menu a").forEach(link => {
+                const key = link.dataset.key;
+                if (key && t[key]) link.textContent = t[key];
+            });
+
+            const loginBtn = document.getElementById("loginBtn");
+            if (loginBtn) loginBtn.textContent = t.login;
+
+            const searchInput = document.querySelector(".search-container input");
+            if (searchInput) searchInput.placeholder = t.search;
+
+            document.querySelectorAll(".card-title").forEach(title => {
+                const original = title.dataset.original || title.textContent.trim();
+                title.dataset.original = original;
+                if (t[original]) title.textContent = t[original];
+            });
+        }
+
+        applyLanguage(currentLang);
+
+
+        document.getElementById("langToggle").onclick = () => {
+            currentLang = currentLang === "ar" ? "en" : "ar";
+            applyLanguage(currentLang);
+        };
+
+
+        const menuBtn = document.getElementById("menuToggle");
+        const sideMenu = document.getElementById("sideMenu");
+        const overlay = document.getElementById("overlay");
+
+        menuBtn.onclick = () => {
+            sideMenu.classList.toggle("open");
+            overlay.classList.toggle("show");
+        };
+
+        overlay.onclick = () => {
+            sideMenu.classList.remove("open");
+            overlay.classList.remove("show");
+        };
+    </script>
+
+
+</body>
+
+</html>
